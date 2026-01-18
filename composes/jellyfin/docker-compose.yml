@@ -1,7 +1,7 @@
 volumes:
   media:
     driver: local
-    driver-opts:
+    driver_opts:
       type: cifs
       device: ${SHARE_ADDR}
       o: "username=${SHARE_USER},password=${SHARE_PWD},vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777"

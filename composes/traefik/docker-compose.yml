@@ -1,16 +1,52 @@
 networks:
-  proxy:
+  public:
+    driver: bridge
+  internal:
+    driver: bridge
+  private:
     driver: bridge
 
 services:
-  traefik:
-    image: traefik:v3.6
+  proxy:
+    image: traefik:3.6
+    restart: unless-stopped
+    container_name: traefik
+    networks:
+      - public
+      - internal
+      - private
     command:
-      - "--api.insecure=true"
+      # API Configuration
+      - "--api.insecure=false"
+      - "--api.dashboard=true"
+
+      # Docker Provider
       - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      # Entrypoints
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # # Let's Encrypt Configuration
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge=true"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.cloudflare.acme.email=${CF_API_EMAIL}"
+      - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/cloudflare-dns.json"
+      - "--certificatesresolvers.cloudflare.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+
+      # Redirect HTTP to HTTPS
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
     ports:
-      - "80:80"
-      - "8080:8080"
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
+
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - CF_API_EMAIL=${CF_API_EMAIL}
+
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/traefik/letsencrypt:/letsencrypt
