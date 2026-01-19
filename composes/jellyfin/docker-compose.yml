@@ -6,6 +6,10 @@ volumes:
       device: ${SHARE_ADDR}
       o: "username=${SHARE_USER},password=${SHARE_PWD},vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777"
 
+networks:
+  private-proxy:
+    external: true
+
 services:
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin
@@ -19,17 +23,10 @@ services:
       - JELLYFIN_PublishedServerUrl=${URL}
     volumes:
       # Map container paths to your host machine paths
-      - /path/to/jellyfin/config:/config
-      - /path/to/jellyfin/cache:/cache
-      - /path/to/media:media # :ro means read-only
+      - /var/jellyfin/config:/config
+      - /var/jellyfin/cache:/cache
+      - media:/media # :ro means read-only
       # Add more media library mappings as needed
-    ports:
-      # Map host ports to container ports (HTTP port is 8096 by default)
-      - 8096:8096
-      # Optional ports for other services like DLNA (1900/udp) or HTTPS (8920)
-      # - 8920:8920
-      # - 7359:7359/udp
-      # - 1900:1900/udp
     restart: unless-stopped
     # Optional: uncomment the lines below to enable hardware transcoding if you have a compatible GPU
     # devices:
@@ -37,3 +34,19 @@ services:
     #   - /dev/nvidiactl:/dev/nvidiactl # Nvidia (NVENC)
     #   - /dev/nvidia-uvm:/dev/nvidia-uvm
     #   - /dev/nvidia-modeset:/dev/nvidia-modeset
+    networks:
+      - private-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.tls=true"
+      - "traefik.http.routers.jellyfin.service=jellyfin"
+      - "traefik.http.routers.jellyfin.entrypoints=websecure"
+      - "traefik.http.routers.jellyfin.rule=Host(`${JELLYFIN_HOST}`)"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, video]
