@@ -56,8 +56,8 @@ services:
       - "traefik.http.routers.internal.tls.domains[0].sans=*.${INTERNAL_DOMAIN}"
 
       # public router
-      - "traefik.http.routers.public.tls=true"
-      - "traefik.http.routers.public.tls.certresolver=cloudflare-dns"
+      # - "traefik.http.routers.public.tls=true"
+      # - "traefik.http.routers.public.tls.certresolver=cloudflare-dns"
       - "traefik.http.routers.public.tls.domains[0].main=${PUBLIC_DOMAIN}"
       - "traefik.http.routers.public.tls.domains[0].sans=*.${PUBLIC_DOMAIN}"
 
