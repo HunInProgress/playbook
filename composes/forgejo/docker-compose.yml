@@ -1,5 +1,8 @@
-# networks:
-#  newt:
+networks:
+##  Newt for public, traefik for internal
+  newt:
+    external: true
+#  traefik:
 #    external: true
 
 services:
@@ -10,8 +13,8 @@ services:
       - USER_UID=1000
       - USER_GID=1000
     restart: unless-stopped
-    # networks:
-    #   - newt
+    networks:
+      - newt
     # volumes:
     #   - /mnt/mp0/forgejo:/data
     #   - /etc/localtime:/etc/localtime:ro
