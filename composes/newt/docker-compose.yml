@@ -1,5 +1,6 @@
 networks:
   newt:
+    name: newt
     driver: bridge
 
 services:
