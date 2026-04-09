@@ -13,7 +13,7 @@ services:
       # Set your timezone, e.g., America/New_York or Europe/Warsaw
       - TZ=Etc/UTC
       # Optional: Set the published server URL if behind a reverse proxy
-      - JELLYFIN_PublishedServerUrl=${URL}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_HOST}
     volumes:
       # Map container paths to your host machine paths
       - /mnt/mp0/var/jellyfin/config:/config
