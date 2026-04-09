@@ -15,47 +15,43 @@ services:
     networks:
       - traefik
     command:
-    ##  API Configuration
     #  - "--api.insecure=false"
     #  - "--api.dashboard=true"
 
-    ## Docker Provider
     #  - "--providers.docker=true"
     #  - "--providers.docker.exposedbydefault=false"
 
-    ## Entrypoints
-    #  - "--entrypoints.web.address=:80"
-    #  - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.ssh.address=:222"
 
-    ## Let's Encrypt Configuration
     #   - "--certificatesresolvers.cloudflare-dns.acme.dnschallenge=true"
     #   - "--certificatesresolvers.cloudflare-dns.acme.dnschallenge.provider=cloudflare"
     #   - "--certificatesresolvers.cloudflare-dns.acme.email=${CF_API_EMAIL}"
     #   - "--certificatesresolvers.cloudflare-dns.acme.storage=/letsencrypt/cloudflare-dns.json"
     #   - "--certificatesresolvers.cloudflare-dns.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
 
-    #   Redirect HTTP to HTTPS
     #   - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
     #   - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
 
-    # labels:
-    ##  private router
-    #   - "traefik.http.routers.private.tls=true"
-    #   - "traefik.http.routers.private.tls.certresolver=cloudflare-dns"
-    #   - "traefik.http.routers.private.tls.domains[0].main=${PRIVATE_DOMAIN}"
-    #   - "traefik.http.routers.private.tls.domains[0].sans=*.${PRIVATE_DOMAIN}"
+    labels:
+    #  private router
+      - "traefik.http.routers.private.tls=true"
+      - "traefik.http.routers.private.tls.certresolver=cloudflare-dns"
+      - "traefik.http.routers.private.tls.domains[0].main=${PRIVATE_DOMAIN}"
+      - "traefik.http.routers.private.tls.domains[0].sans=*.${PRIVATE_DOMAIN}"
 
-    ##  internal router
-    #   - "traefik.http.routers.internal.tls=true"
-    #   - "traefik.http.routers.internal.tls.certresolver=cloudflare-dns"
-    #   - "traefik.http.routers.internal.tls.domains[0].main=${INTERNAL_DOMAIN}"
-    #   - "traefik.http.routers.internal.tls.domains[0].sans=*.${INTERNAL_DOMAIN}"
+    #  internal router
+      - "traefik.http.routers.internal.tls=true"
+      - "traefik.http.routers.internal.tls.certresolver=cloudflare-dns"
+      - "traefik.http.routers.internal.tls.domains[0].main=${INTERNAL_DOMAIN}"
+      - "traefik.http.routers.internal.tls.domains[0].sans=*.${INTERNAL_DOMAIN}"
 
-    ##  public router
-    #   - "traefik.http.routers.public.tls=true"
-    #   - "traefik.http.routers.public.tls.certresolver=cloudflare-dns"
-    #   - "traefik.http.routers.public.tls.domains[0].main=${PUBLIC_DOMAIN}"
-    #   - "traefik.http.routers.public.tls.domains[0].sans=*.${PUBLIC_DOMAIN}"
+    #  public router
+      - "traefik.http.routers.public.tls=true"
+      - "traefik.http.routers.public.tls.certresolver=cloudflare-dns"
+      - "traefik.http.routers.public.tls.domains[0].main=${PUBLIC_DOMAIN}"
+      - "traefik.http.routers.public.tls.domains[0].sans=*.${PUBLIC_DOMAIN}"
 
     ports:
       - "${HTTP_PORT}:80"
