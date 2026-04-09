@@ -15,9 +15,20 @@ services:
     restart: unless-stopped
     networks:
       - newt
-    # volumes:
-    #   - /mnt/mp0/forgejo:/data
-    #   - /etc/localtime:/etc/localtime:ro
+    volumes:
+      - /mnt/mp0/forgejo:/data
+      - /etc/localtime:/etc/localtime:ro
+    # labels:
+    #   traefik.enable: "true"
+    #   traefik.http.routers.forgejo-router.rule: Host(`${URL}`)
+    #   traefik.http.routers.forgejo-router.entrypoints: web
+    #   traefik.http.services.forgejo-svc.loadbalancer.server.port: 3000
+    
+    #   traefik.tcp.routers.forgejo.entrypoints: ssh
+    #   traefik.tcp.routers.forgejo.rule: HostSNI(`example.com`)
+    #   traefik.tcp.routers.forgejo.service: forgejo
+
+    
     # ports:
-    #  - "3000:3000"
-    #  - "222:22"
+    #   - "3000:3000"
+    #   - "222:22"
