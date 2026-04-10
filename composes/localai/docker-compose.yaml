@@ -1,0 +1,24 @@
+services:
+  local-ai:
+    image: localai/localai:latest-gpu-nvidia-cuda-13
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 1m
+      timeout: 20m
+      retries: 5
+    ports:
+      - 8080:8080
+    environment:
+      - DEBUG=false
+    volumes:
+      - /mnt/mp0/local-ai/models:/models:cached
+      - /mnt/mp0/local-ai/backends:/backends
+      - /mnt/mp0/local-ai/configuration:/configuration
+      - /mnt/mp0/local-ai/data:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia.com/gpu
+              count: all
+              capabilities: [gpu]
