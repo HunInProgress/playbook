@@ -10,8 +10,8 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    volumes:
-      # - /mnt/mp0/ollama:/root/.ollama
+    # volumes:
+    #   - /mnt/mp0/ollama:/root/.ollama
     restart: unless-stopped
     deploy:
       resources:
@@ -28,8 +28,8 @@ services:
     #   - "3000:3000"
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
-    volumes:
-      - /mnt/mp0/open-webui:/app/backend/data
+    # volumes:
+    #   - /mnt/mp0/open-webui:/app/backend/data
     depends_on:
       - ollama
     restart: unless-stopped

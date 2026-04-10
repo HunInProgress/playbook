@@ -1,3 +1,11 @@
+# networks:
+#   newt:
+#     external: true
+#   cloudflared:
+#     external: true
+#   traefik:
+#     external: true
+
 services:
   local-ai:
     image: localai/localai:latest-gpu-nvidia-cuda-13
