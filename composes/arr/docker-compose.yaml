@@ -1,0 +1,85 @@
+volumes:
+  media:
+    driver: local
+    driver_opts:
+      type: cifs
+      device: ${SHARE_ADDR}
+      o: "username=${SHARE_USER},password=${SHARE_PWD},vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777"
+
+services:
+  # Indexer Manager - The brain that connects trackers to your apps
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  # Movie Management
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config/radarr:/config
+      - /mnt/data:/data # Root data folder for hardlinks
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  # TV Show Management
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config/sonarr:/config
+      - /mnt/data:/data
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  # Download Client
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+    volumes:
+      - ./config/qbittorrent:/config
+      - /mnt/data/torrents:/data/torrents
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  # Subtitle Management
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config/bazarr:/config
+      - /mnt/data/media:/data/media
+    ports:
+      - 6767:6767
+    restart: unless-stopped

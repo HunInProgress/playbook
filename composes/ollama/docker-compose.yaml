@@ -1,0 +1,35 @@
+networks:
+  # newt:
+  #   external: true
+  # cloudflared:
+  #   external: true
+  # traefik:
+  #   external: true
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      # - /mnt/mp0/ollama:/root/.ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    # ports:
+    #   - "3000:3000"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - /mnt/mp0/open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
