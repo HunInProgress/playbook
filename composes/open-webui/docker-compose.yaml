@@ -1,0 +1,25 @@
+# networks:
+#   newt:
+#     external: true
+#   cloudflared:
+#     external: true
+#   traefik:
+#     external: true
+#   ollama:
+#     external: true
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    # ports:
+    #   - "3000:3000"
+    # networks:
+    #   - newt
+    # environment:
+    #   - OLLAMA_BASE_URL=http://ollama:11434
+    # volumes:
+    #   - /mnt/mp0/open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
