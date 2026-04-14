@@ -9,6 +9,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - dind
+    user: 0:0
     container_name: "runner"
     environment:
       DOCKER_HOST: tcp://dind:2375
