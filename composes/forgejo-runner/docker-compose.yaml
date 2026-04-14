@@ -4,7 +4,9 @@ networks:
 
 services:
   runner:
-    image: "data.forgejo.org/forgejo/runner:12"
+    build:
+      context: .
+      dockerfile: Dockerfile
     networks:
       - dind
     container_name: "runner"
