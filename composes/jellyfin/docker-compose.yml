@@ -1,8 +1,3 @@
-networks:
-  ## traefik for internal, newt for public
-  traefik:
-    external: true
-
 services:
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin
@@ -16,8 +11,8 @@ services:
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_HOST}
     volumes:
       # Map container paths to your host machine paths
-      - /mnt/mp0/var/jellyfin/config:/config
-      - /mnt/mp0/var/jellyfin/cache:/cache
+      - /mnt/rust/jellyfin/config:/config
+      - /mnt/rust/jellyfin/cache:/cache
       - /mnt/media:/media # :ro means read-only
       # Add more media library mappings as needed
     restart: unless-stopped
@@ -27,15 +22,6 @@ services:
     #   - /dev/nvidiactl:/dev/nvidiactl # Nvidia (NVENC)
     #   - /dev/nvidia-uvm:/dev/nvidia-uvm
     #   - /dev/nvidia-modeset:/dev/nvidia-modeset
-    networks:
-      - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.jellyfin.tls=true"
-      - "traefik.http.routers.jellyfin.service=jellyfin"
-      - "traefik.http.routers.jellyfin.entrypoints=web"
-      - "traefik.http.routers.jellyfin.rule=Host(`${JELLYFIN_HOST}`)"
-      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     deploy:
       resources:
         reservations:

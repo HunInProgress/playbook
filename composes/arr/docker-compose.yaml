@@ -1,13 +1,5 @@
-volumes:
-  media:
-    driver: local
-    driver_opts:
-      type: cifs
-      device: ${SHARE_ADDR}
-      o: "username=${SHARE_USER},password=${SHARE_PWD},vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777"
-
 services:
-  # Indexer Manager - The brain that connects trackers to your apps
+  # Indexer proxy for all arr apps
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -16,27 +8,12 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./config/prowlarr:/config
+      - /mnt/rust/prowlarr:/config
     ports:
-      - 9696:9696
+      - "6969:6969"
     restart: unless-stopped
 
-  # Movie Management
-  radarr:
-    image: lscr.io/linuxserver/radarr:latest
-    container_name: radarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ./config/radarr:/config
-      - /mnt/data:/data # Root data folder for hardlinks
-    ports:
-      - 7878:7878
-    restart: unless-stopped
-
-  # TV Show Management
+  # TV show management
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
@@ -45,31 +22,52 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./config/sonarr:/config
-      - /mnt/data:/data
+      - /mnt/rust/sonarr:/config
+      - /mnt/media/tv:/tv # Adjust path to your TV shows
+      - /mnt/rust/downloads:/downloads # Adjust path to your downloads
     ports:
-      - 8989:8989
+      - "8989:8989"
+    depends_on:
+      - prowlarr
     restart: unless-stopped
 
-  # Download Client
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+  # Movie management
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - WEBUI_PORT=8080
     volumes:
-      - ./config/qbittorrent:/config
-      - /mnt/data/torrents:/data/torrents
+      - /mnt/rust/radarr:/config
+      - /mnt/media/movies:/movies # Adjust path to your movies
+      - /mnt/rust/downloads:/downloads # Adjust path to your downloads
     ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      - "7878:7878"
+    depends_on:
+      - prowlarr
     restart: unless-stopped
 
-  # Subtitle Management
+  # Music management
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/rust/lidarr:/config
+      - /mnt/media/music:/music # Adjust path to your music
+      - /mnt/rust/downloads:/downloads # Adjust path to your downloads
+    ports:
+      - "8686:8686"
+    depends_on:
+      - prowlarr
+    restart: unless-stopped
+
+  # Subtitle management
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -78,8 +76,30 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ./config/bazarr:/config
-      - /mnt/data/media:/data/media
+      - /mnt/rust/bazarr:/config
+      - /mnt/media/tv:/tv # Adjust path to your TV shows
+      - /mnt/media/movies:/movies # Adjust path to your movies
     ports:
-      - 6767:6767
+      - "6767:6767"
+    depends_on:
+      - sonarr
+      - radarr
+    restart: unless-stopped
+
+  # Torrent client (qBittorrent)
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=6881
+    volumes:
+      - /mnt/rust/qbittorrent:/config
+      - /mnt/rust/downloads:/downloads # Adjust path to your downloads
+    ports:
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "6882:6882"
     restart: unless-stopped
