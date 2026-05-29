@@ -17,13 +17,13 @@ services:
     command:
       - "--entrypoints.web.address=:${HTTP_PORT}"
       # - "--entrypoints.ssh.address=:${SSH_PORT}"
-    #  - "--entrypoints.websecure.address=:${HTTPS_PORT}"
+      #  - "--entrypoints.websecure.address=:${HTTPS_PORT}"
 
-    #  - "--api.insecure=false"
-    #  - "--api.dashboard=true"
+      #  - "--api.insecure=false"
+      #  - "--api.dashboard=true"
 
-    #  - "--providers.docker=true"
-    #  - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
 
     #   - "--certificatesresolvers.cloudflare-dns.acme.dnschallenge=true"
     #   - "--certificatesresolvers.cloudflare-dns.acme.dnschallenge.provider=cloudflare"
