@@ -1,25 +1,36 @@
+networks:
+  traefik:
+    external: true
+
 services:
   # Indexer proxy for all arr apps
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - /mnt/rust/prowlarr:/config
     ports:
-      - "6969:6969"
+      - "9696:9696"
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowl.${ARR_HOST}`)"
+      - "traefik.http.routers.prowlarr.entrypoints=web"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
 
   # TV show management
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - /mnt/rust/sonarr:/config
@@ -30,14 +41,21 @@ services:
     depends_on:
       - prowlarr
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.${ARR_HOST}`)"
+      - "traefik.http.routers.sonarr.entrypoints=web"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
 
   # Movie management
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - /mnt/rust/radarr:/config
@@ -48,14 +66,21 @@ services:
     depends_on:
       - prowlarr
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.${ARR_HOST}`)"
+      - "traefik.http.routers.radarr.entrypoints=web"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
 
   # Music management
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - /mnt/rust/lidarr:/config
@@ -66,14 +91,21 @@ services:
     depends_on:
       - prowlarr
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lidarr.rule=Host(`lidarr.${ARR_HOST}`)"
+      - "traefik.http.routers.lidarr.entrypoints=web"
+      - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
 
   # Subtitle management
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - /mnt/rust/bazarr:/config
@@ -85,21 +117,36 @@ services:
       - sonarr
       - radarr
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bazarr.rule=Host(`bazarr.${ARR_HOST}`)"
+      - "traefik.http.routers.bazarr.entrypoints=web"
+      - "traefik.http.services.bazarr.loadbalancer.server.port=6767"
 
   # Torrent client (qBittorrent)
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
+      # - PUID=1000
+      # - PGID=1000
       - TZ=Etc/UTC
-      - WEBUI_PORT=6881
+      - WEBUI_PORT=8080
     volumes:
       - /mnt/rust/qbittorrent:/config
       - /mnt/rust/downloads:/downloads # Adjust path to your downloads
     ports:
+      - "8080:8080"
       - "6881:6881"
       - "6881:6881/udp"
       - "6882:6882"
     restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.${ARR_HOST}`)"
+      - "traefik.http.routers.qbittorrent.entrypoints=web"
+      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"

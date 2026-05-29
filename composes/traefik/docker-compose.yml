@@ -1,6 +1,6 @@
 # For this model, by default, each node is only expected to be accessed via VPN, as a Homelab is usually not publicly accessible.
 # For ease of maintenance, in this model, the exit nodes will also be a reverse proxy, and they should handle certificates as well.
-# This means for each internal node, Traefik does not handle TLS.
+# This means for each internal service, Traefik does not handle TLS.
 
 networks:
   traefik:
@@ -16,9 +16,9 @@ services:
       - traefik
     command:
       - "--entrypoints.web.address=:${HTTP_PORT}"
-      - "--entrypoints.ssh.address=:${SSH_PORT}"
+      # - "--entrypoints.ssh.address=:${SSH_PORT}"
     #  - "--entrypoints.websecure.address=:${HTTPS_PORT}"
-      
+
     #  - "--api.insecure=false"
     #  - "--api.dashboard=true"
 
@@ -55,7 +55,7 @@ services:
 
     ports:
       - "${HTTP_PORT}:80"
-      - "${SSH_PORT}:22
+      # - "${SSH_PORT}:22"
     #  - "${HTTPS_PORT}:443"
 
     # environment:
