@@ -3,18 +3,15 @@ services:
     image: ghcr.io/linuxserver/jellyfin
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
-      # Set your timezone, e.g., America/New_York or Europe/Warsaw
-      - TZ=Etc/UTC
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ}
       # Optional: Set the published server URL if behind a reverse proxy
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_HOST}
     volumes:
-      # Map container paths to your host machine paths
-      - /mnt/rust/jellyfin/config:/config
-      - /mnt/rust/jellyfin/cache:/cache
-      - /mnt/media:/media # :ro means read-only
-      # Add more media library mappings as needed
+      - ${JELLYFIN_CONFIG:-/mnt/rust/jellyfin/config}:/config
+      - ${JELLYFIN_CACHE:-/mnt/rust/jellyfin/cache}:/cache
+      - ${MEDIA_PATH:-/mnt/media}:/media:ro
     restart: unless-stopped
     # Optional: uncomment the lines below to enable hardware transcoding if you have a compatible GPU
     # devices:
