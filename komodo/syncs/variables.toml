@@ -19,3 +19,8 @@ description = "Linux user ID for linuxserver.io containers"
 name = "PGID"
 value = "1000"
 description = "Linux group ID for linuxserver.io containers"
+
+[[variable]]
+name = "PANGOLIN_ENDPOINT"
+value = ""
+description = "Pangolin server endpoint shared by newt and olm (e.g. https://pangolin.example.com)"

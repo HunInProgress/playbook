@@ -34,7 +34,7 @@ branch = "master"
 run_directory = "composes/newt"
 file_paths = ["docker-compose.yml"]
 environment = """
-PANGOLIN_ENDPOINT =
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
 NEWT_ID =
 NEWT_SECRET =
 """
@@ -48,7 +48,7 @@ branch = "master"
 run_directory = "composes/olm"
 file_paths = ["docker-compose.yml"]
 environment = """
-PANGOLIN_ENDPOINT =
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
 OLM_ID =
 OLM_SECRET =
 """
