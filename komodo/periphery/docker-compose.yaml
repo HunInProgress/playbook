@@ -3,6 +3,7 @@ name: komodo-periphery
 services:
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:${KOMODO_IMAGE_TAG:-2}
+    container_name: periphery
     init: true
     restart: unless-stopped
     env_file: .env

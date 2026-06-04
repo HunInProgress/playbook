@@ -9,6 +9,7 @@
 services:
   local-ai:
     image: localai/localai:latest-gpu-nvidia-cuda-13
+    container_name: local-ai
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
       interval: 1m

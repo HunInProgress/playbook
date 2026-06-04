@@ -3,6 +3,7 @@ name: komodo
 services:
   mongo:
     image: mongo
+    container_name: komodo-mongo
     labels:
       komodo.skip: # Prevent Komodo from stopping this with StopAllContainers
     command: --quiet --wiredTigerCacheSizeGB 0.25
@@ -16,6 +17,7 @@ services:
 
   komodo:
     image: ghcr.io/moghtech/komodo-core:${KOMODO_IMAGE_TAG:-2}
+    container_name: komodo
     init: true
     restart: unless-stopped
     depends_on:
