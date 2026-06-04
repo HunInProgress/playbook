@@ -1,0 +1,66 @@
+## Komodo Resource Sync — Media
+## Register in: Komodo UI > Resource Syncs > New Sync
+##   repo: HunInProgress/playbook  path: komodo/syncs/media.toml
+##
+## Stacks: jellyfin, arr, immich
+
+[[stack]]
+name = "jellyfin"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/jellyfin"
+file_paths = ["docker-compose.yml"]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+JELLYFIN_HOST =
+JELLYFIN_CONFIG = /mnt/rust/jellyfin/config
+JELLYFIN_CACHE = /mnt/rust/jellyfin/cache
+MEDIA_PATH = /mnt/media
+"""
+
+[[stack]]
+name = "arr"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/arr"
+file_paths = ["docker-compose.yaml"]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+ARR_HOST =
+PROWLARR_CONFIG = /mnt/rust/prowlarr
+SONARR_CONFIG = /mnt/rust/sonarr
+RADARR_CONFIG = /mnt/rust/radarr
+LIDARR_CONFIG = /mnt/rust/lidarr
+BAZARR_CONFIG = /mnt/rust/bazarr
+QBITTORRENT_CONFIG = /mnt/rust/qbittorrent
+TV_PATH = /mnt/media/tv
+MOVIES_PATH = /mnt/media/movies
+MUSIC_PATH = /mnt/media/music
+DOWNLOADS_PATH = /mnt/rust/downloads
+"""
+
+[[stack]]
+name = "immich"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/immich"
+file_paths = ["docker-compose.yaml"]
+environment = """
+IMMICH_VERSION = release
+UPLOAD_LOCATION = /mnt/media/immich
+MODELS_CACHE_LOCATION = /mnt/mp0/immich/models
+DB_DATA_LOCATION = /mnt/mp0/immich/db
+DB_USERNAME = immich
+DB_PASSWORD =
+DB_DATABASE_NAME = immich
+"""

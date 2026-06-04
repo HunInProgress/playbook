@@ -1,0 +1,32 @@
+## Komodo Resource Sync — AI / ML
+## Register in: Komodo UI > Resource Syncs > New Sync
+##   repo: HunInProgress/playbook  path: komodo/syncs/ai.toml
+##
+## Stacks: ollama, open-webui, local-ai
+
+[[stack]]
+name = "ollama"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/ollama"
+file_paths = ["docker-compose.yaml"]
+
+[[stack]]
+name = "open-webui"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/open-webui"
+file_paths = ["docker-compose.yaml"]
+
+[[stack]]
+name = "local-ai"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/localai"
+file_paths = ["docker-compose.yaml"]

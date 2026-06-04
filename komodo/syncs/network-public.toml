@@ -1,0 +1,54 @@
+## Komodo Resource Sync — Public Networking
+## Register in: Komodo UI > Resource Syncs > New Sync
+##   repo: HunInProgress/playbook  path: komodo/syncs/network-public.toml
+##
+## Stacks: cloudflared, pangolin, newt, olm
+
+[[stack]]
+name = "cloudflared"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/cloudflared"
+file_paths = ["docker-compose.yml"]
+environment = """
+TUNNEL_TOKEN =
+"""
+
+[[stack]]
+name = "pangolin"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/pangolin"
+file_paths = ["docker-compose.yml"]
+
+[[stack]]
+name = "newt"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/newt"
+file_paths = ["docker-compose.yml"]
+environment = """
+PANGOLIN_ENDPOINT =
+NEWT_ID =
+NEWT_SECRET =
+"""
+
+[[stack]]
+name = "olm"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "composes/olm"
+file_paths = ["docker-compose.yml"]
+environment = """
+PANGOLIN_ENDPOINT =
+OLM_ID =
+OLM_SECRET =
+"""
