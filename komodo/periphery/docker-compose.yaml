@@ -8,6 +8,7 @@ services:
     restart: unless-stopped
     env_file: .env
     volumes:
+      - ${PERIPHERY_KEYS_PATH:-/etc/komodo/keys}:/config/keys
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc:/proc
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}

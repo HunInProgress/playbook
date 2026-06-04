@@ -57,9 +57,10 @@ ask PERIPHERY_CORE_ADDRESS "Komodo Core WebSocket address" "ws://<CORE_IP>:9120"
 ask PERIPHERY_CONNECT_AS   "Name for this server in the UI" ""
 
 header "Authentication"
-echo -e "  ${YELLOW}Tip:${RESET} copy the Core Public Key from Komodo UI → Settings → Authentication"
+echo -e "  ${YELLOW}Tip:${RESET} generate an onboarding key in Komodo UI → Settings → Onboarding"
+echo -e "  The onboarding key lets periphery auto-register. You can remove it after first connect."
 echo
-ask PERIPHERY_CORE_PUBLIC_KEYS "Core public key" "" secret
+ask PERIPHERY_ONBOARDING_KEY  "Onboarding key (O-...)" ""
 
 header "Storage"
 ask PERIPHERY_ROOT_DIRECTORY "Periphery root directory (stacks/repos live here)" "/etc/komodo"
@@ -77,7 +78,8 @@ TZ=${TZ}
 
 PERIPHERY_CORE_ADDRESS=${PERIPHERY_CORE_ADDRESS}
 PERIPHERY_CONNECT_AS=${PERIPHERY_CONNECT_AS}
-PERIPHERY_CORE_PUBLIC_KEYS=${PERIPHERY_CORE_PUBLIC_KEYS}
+PERIPHERY_ONBOARDING_KEY=${PERIPHERY_ONBOARDING_KEY}
+PERIPHERY_CORE_PUBLIC_KEYS=file:/config/keys/core.pub
 PERIPHERY_ROOT_DIRECTORY=${PERIPHERY_ROOT_DIRECTORY}
 PERIPHERY_INCLUDE_DISK_MOUNTS=/etc/hostname
 EOF

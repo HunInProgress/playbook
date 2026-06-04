@@ -68,7 +68,6 @@ ask KOMODO_MONGO_DATA      "MongoDB data directory"      "/etc/komodo/mongo/data
 ask KOMODO_MONGO_CONFIG    "MongoDB config directory"    "/etc/komodo/mongo/config"
 ask KOMODO_KEYS_PATH       "Keys directory"              "/etc/komodo/keys"
 ask KOMODO_BACKUPS_PATH    "Backups directory"           "/etc/komodo/backups"
-ask PERIPHERY_ROOT_DIRECTORY "Periphery root directory (stacks/repos live here)" "/etc/komodo"
 
 header "Database"
 ask KOMODO_DATABASE_USERNAME "MongoDB username"          "admin"
@@ -118,12 +117,6 @@ KOMODO_WEBHOOK_SECRET=${KOMODO_WEBHOOK_SECRET}
 KOMODO_JWT_SECRET=${KOMODO_JWT_SECRET}
 KOMODO_JWT_TTL=${KOMODO_JWT_TTL}
 KOMODO_MONITORING_INTERVAL=${KOMODO_MONITORING_INTERVAL}
-
-PERIPHERY_CORE_ADDRESS=ws://core:9120
-PERIPHERY_CONNECT_AS=Local
-PERIPHERY_CORE_PUBLIC_KEYS=file:/config/keys/core.pub
-PERIPHERY_ROOT_DIRECTORY=${PERIPHERY_ROOT_DIRECTORY}
-PERIPHERY_INCLUDE_DISK_MOUNTS=/etc/hostname
 EOF
 
 success ".env written to $ENV_FILE"
