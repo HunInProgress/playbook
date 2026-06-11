@@ -1,9 +1,19 @@
 name: komodo
 
+networks:
+  pangolin:
+    name: pangolin
+    external: true
+  komodo:
+    name: komodo
+    driver: bridge
+
 services:
   mongo:
     image: mongo:${MONGO_VERSION:-7.0.35}
     container_name: komodo-mongo
+    networks:
+      - komodo
     labels:
       komodo.skip: # Prevent Komodo from stopping this with StopAllContainers
     command: --quiet --wiredTigerCacheSizeGB 0.25
@@ -22,11 +32,12 @@ services:
     restart: unless-stopped
     depends_on:
       - mongo
-    ports:
-      - "9120:9120"
     env_file: .env
     environment:
       KOMODO_DATABASE_ADDRESS: mongo:27017
     volumes:
       - ${KOMODO_KEYS_PATH:-/etc/komodo/keys}:/config/keys
       - ${KOMODO_BACKUPS_PATH:-/etc/komodo/backups}:/backups
+    networks:
+      - komodo
+      - pangolin

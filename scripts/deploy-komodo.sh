@@ -74,7 +74,6 @@ ask KOMODO_DATABASE_USERNAME "MongoDB username"          "admin"
 ask KOMODO_DATABASE_PASSWORD "MongoDB password"          "" secret
 
 header "Core settings"
-ask KOMODO_HOST            "Public URL of this Komodo instance (for webhooks/OAuth)" "http://localhost:9120"
 ask KOMODO_TITLE           "Browser tab title"           "Komodo"
 ask TZ                     "Timezone"                    "Asia/Ho_Chi_Minh"
 
@@ -107,7 +106,6 @@ KOMODO_DATABASE_PASSWORD=${KOMODO_DATABASE_PASSWORD}
 
 TZ=${TZ}
 
-KOMODO_HOST=${KOMODO_HOST}
 KOMODO_TITLE=${KOMODO_TITLE}
 KOMODO_PERIPHERY_PUBLIC_KEY=file:/config/keys/periphery.pub
 KOMODO_LOCAL_AUTH=true
@@ -132,5 +130,4 @@ echo
 docker compose -f "$COMPOSE_DIR/docker-compose.yaml" --env-file "$ENV_FILE" up -d
 
 echo
-success "Komodo is up! Open ${KOMODO_HOST} in your browser."
 echo -e "  Login: ${BOLD}${KOMODO_INIT_ADMIN_USERNAME}${RESET} / (the password you set)"
