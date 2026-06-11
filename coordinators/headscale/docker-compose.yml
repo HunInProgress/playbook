@@ -11,9 +11,12 @@ services:
     ports:
       - 8080:8080
 
-  headscale-admin:
-    image: goodieshq/headscale-admin:${HEADSCALE_ADMIN_VERSION:-0.26.0}
-    container_name: headscale-admin
+  headplane:
+    image: ghcr.io/tale/headplane:${HEADPLANE_VERSION:-v0.6.3}
+    container_name: headplane
     restart: unless-stopped
     ports:
-      - 80:80
+      - "3000:3000"
+    volumes:
+      - /mnt/default/volumes/headplane/config.yaml:/etc/headplane/config.yaml
+      - /mnt/default/volumes/headplane/lib/headplane:/var/lib/headplane
