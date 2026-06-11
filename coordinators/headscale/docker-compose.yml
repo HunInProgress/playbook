@@ -12,7 +12,7 @@ services:
       - 8080:8080
 
   headplane:
-    image: ghcr.io/tale/headplane:${HEADPLANE_VERSION:-v0.6.3}
+    image: ghcr.io/tale/headplane:${HEADPLANE_VERSION:-0.6.3}
     container_name: headplane
     restart: unless-stopped
     ports:
