@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-COMPOSE_DIR="$REPO_ROOT/komodo/periphery"
+COMPOSE_DIR="$REPO_ROOT/coordinators/komodo/periphery"
 ENV_FILE="$COMPOSE_DIR/.env"
 
 # ── Colors ────────────────────────────────────────────────────────────────────

@@ -1,0 +1,24 @@
+networks:
+  pangolin:
+    name: pangolin
+    external: true
+
+services:
+  headscale:
+    image: headscale/headscale:${HEADSCALE_VERSION:-v0.28.0}
+    container_name: headscale
+    volumes:
+      - /mnt/default/volumes/headscale/config:/etc/headscale
+      - /mnt/default/volumes/headscale/lib:/var/lib/headscale
+      - /mnt/default/volumes/headscale/run:/var/run/headscale
+    command: serve
+    restart: unless-stopped
+    networks:
+      - pangolin
+
+  headscale-admin:
+    image: goodieshq/headscale-admin:${HEADSCALE_ADMIN_VERSION:-0.26.0}
+    container_name: headscale-admin
+    restart: unless-stopped
+    networks:
+      - pangolin

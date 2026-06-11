@@ -1,0 +1,20 @@
+# Public tunnel: newt (Pangolin site connector).
+# Public apps join the `public` network only — Pangolin routes directly to them.
+# No traefik, no `internal` network dependency.
+
+networks:
+  public:
+    name: public
+    driver: bridge
+
+services:
+  newt:
+    image: fosrl/newt:${NEWT_VERSION:-1.3.2}
+    container_name: newt
+    restart: unless-stopped
+    networks:
+      - public
+    environment:
+      - PANGOLIN_ENDPOINT=${PANGOLIN_ENDPOINT}
+      - NEWT_ID=${NEWT_ID}
+      - NEWT_SECRET=${NEWT_SECRET}

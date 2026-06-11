@@ -1,0 +1,36 @@
+networks:
+  internal:
+    name: internal
+    external: true
+
+services:
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin:${JELLYFIN_VERSION:-10.11.11}
+    container_name: jellyfin
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ}
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_HOST}
+    volumes:
+      - ${JELLYFIN_CONFIG:-/mnt/rust/jellyfin/config}:/config
+      - ${JELLYFIN_CACHE:-/mnt/rust/jellyfin/cache}:/cache
+      - ${MEDIA_PATH:-/mnt/media}:/media:ro
+    restart: unless-stopped
+    networks:
+      - internal
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.jellyfin.rule: Host(`${JELLYFIN_HOST}`)
+      traefik.http.routers.jellyfin.entrypoints: web
+      traefik.http.services.jellyfin.loadbalancer.server.port: 8096
+    # Optional: uncomment for hardware transcoding
+    # devices:
+    #   - /dev/dri:/dev/dri # Intel iGPU (VAAPI)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, video]

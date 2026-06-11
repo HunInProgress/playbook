@@ -1,0 +1,19 @@
+networks:
+  ollama:
+    name: ollama
+    driver: bridge
+
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_VERSION:-0.30.7}
+    container_name: ollama
+    networks:
+      - ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

@@ -1,0 +1,172 @@
+## Komodo Resource Sync — Global Variables
+## Register in: Komodo UI > Resource Syncs > New Sync
+##   repo: HunInProgress/playbook  path: syncs/variables.toml
+##
+## Image version variables are interpolated into stack environments via [[VARIABLE_NAME]].
+## Compose files reference them as ${VARIABLE_NAME:-default}.
+
+# ---------------------------------------------------------------------------
+# General
+# ---------------------------------------------------------------------------
+
+[[variable]]
+name = "TZ"
+value = "Asia/Ho_Chi_Minh"
+description = "Timezone for all services"
+
+[[variable]]
+name = "PUID"
+value = "1000"
+description = "Linux user ID for linuxserver.io containers"
+
+[[variable]]
+name = "PGID"
+value = "1000"
+description = "Linux group ID for linuxserver.io containers"
+
+[[variable]]
+name = "PANGOLIN_ENDPOINT"
+value = ""
+description = "Pangolin server endpoint shared by newt and olm (e.g. https://pangolin.example.com)"
+
+# ---------------------------------------------------------------------------
+# Network / proxy images
+# ---------------------------------------------------------------------------
+
+[[variable]]
+name = "TRAEFIK_VERSION"
+value = "v3.7.4"
+description = "Traefik reverse proxy (internal and private zones)"
+
+[[variable]]
+name = "TAILSCALE_VERSION"
+value = "v1.96.5"
+description = "Tailscale client (private zone)"
+
+[[variable]]
+name = "NEWT_VERSION"
+value = "1.3.2"
+description = "Newt Pangolin site connector (public zone)"
+
+[[variable]]
+name = "OLM_VERSION"
+value = "1.2.0"
+description = "OLM Pangolin connector (bare-metal / LXC)"
+
+# ---------------------------------------------------------------------------
+# Coordinator images
+# ---------------------------------------------------------------------------
+
+[[variable]]
+name = "KOMODO_IMAGE_TAG"
+value = "2"
+description = "Komodo Core and Periphery image tag"
+
+[[variable]]
+name = "MONGO_VERSION"
+value = "7.0.35"
+description = "MongoDB for Komodo Core"
+
+[[variable]]
+name = "HEADSCALE_VERSION"
+value = "v0.28.0"
+description = "Headscale control server"
+
+[[variable]]
+name = "HEADSCALE_ADMIN_VERSION"
+value = "0.26.0"
+description = "Headscale admin UI"
+
+[[variable]]
+name = "PANGOLIN_VERSION"
+value = "ee-1.14.1"
+description = "Pangolin tunnel server"
+
+[[variable]]
+name = "GERBIL_VERSION"
+value = "1.3.0"
+description = "Gerbil WireGuard component for Pangolin"
+
+# ---------------------------------------------------------------------------
+# Application images
+# ---------------------------------------------------------------------------
+
+[[variable]]
+name = "FORGEJO_VERSION"
+value = "15.0.2"
+description = "Forgejo Git hosting (public zone)"
+
+[[variable]]
+name = "JELLYFIN_VERSION"
+value = "10.11.11"
+description = "Jellyfin media server"
+
+[[variable]]
+name = "PROWLARR_VERSION"
+value = "2.4.0"
+description = "Prowlarr indexer manager"
+
+[[variable]]
+name = "SONARR_VERSION"
+value = "4.0.17"
+description = "Sonarr TV management"
+
+[[variable]]
+name = "RADARR_VERSION"
+value = "6.2.1"
+description = "Radarr movie management"
+
+[[variable]]
+name = "LIDARR_VERSION"
+value = "3.1.0"
+description = "Lidarr music management"
+
+[[variable]]
+name = "BAZARR_VERSION"
+value = "1.5.6"
+description = "Bazarr subtitle management"
+
+[[variable]]
+name = "QBITTORRENT_VERSION"
+value = "5.2.1"
+description = "qBittorrent download client"
+
+[[variable]]
+name = "IMMICH_VERSION"
+value = "v2.7.5"
+description = "Immich server and machine-learning images"
+
+[[variable]]
+name = "IMMICH_VALKEY_VERSION"
+value = "9"
+description = "Valkey/Redis for Immich"
+
+[[variable]]
+name = "IMMICH_POSTGRES_VERSION"
+value = "14-vectorchord0.4.3-pgvectors0.2.0"
+description = "PostgreSQL image for Immich"
+
+[[variable]]
+name = "OLLAMA_VERSION"
+value = "0.30.7"
+description = "Ollama LLM runtime"
+
+[[variable]]
+name = "OPEN_WEBUI_VERSION"
+value = "v0.9.6"
+description = "Open WebUI frontend"
+
+[[variable]]
+name = "GARAGE_VERSION"
+value = "v2.3.0"
+description = "Garage S3-compatible storage"
+
+[[variable]]
+name = "GARAGE_WEBUI_VERSION"
+value = "1.1.0"
+description = "Garage WebUI"
+
+[[variable]]
+name = "VAULTWARDEN_VERSION"
+value = "1.21.0"
+description = "Vaultwarden password manager (public zone)"

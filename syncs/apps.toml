@@ -1,0 +1,169 @@
+## Komodo Resource Sync — Application Stacks
+## Register in: Komodo UI > Resource Syncs > New Sync
+##   repo: HunInProgress/playbook  path: syncs/apps.toml
+##
+## Internal stacks depend on proxy-internal (join `internal` as external network).
+## Public stack (dev) depends on proxy-public (join `public` as external network).
+## Mark stacks as Template in Komodo UI to duplicate per server.
+
+# ---------------------------------------------------------------------------
+# Media (internal)
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "media"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = [
+  "apps/jellyfin/docker-compose.yml",
+  "apps/arr/docker-compose.yaml"
+]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+JELLYFIN_VERSION = [[JELLYFIN_VERSION]]
+PROWLARR_VERSION = [[PROWLARR_VERSION]]
+SONARR_VERSION = [[SONARR_VERSION]]
+RADARR_VERSION = [[RADARR_VERSION]]
+LIDARR_VERSION = [[LIDARR_VERSION]]
+BAZARR_VERSION = [[BAZARR_VERSION]]
+QBITTORRENT_VERSION = [[QBITTORRENT_VERSION]]
+JELLYFIN_HOST =
+JELLYFIN_CONFIG = /mnt/rust/jellyfin/config
+JELLYFIN_CACHE = /mnt/rust/jellyfin/cache
+MEDIA_PATH = /mnt/media
+ARR_HOST =
+PROWLARR_CONFIG = /mnt/rust/prowlarr
+SONARR_CONFIG = /mnt/rust/sonarr
+RADARR_CONFIG = /mnt/rust/radarr
+LIDARR_CONFIG = /mnt/rust/lidarr
+BAZARR_CONFIG = /mnt/rust/bazarr
+QBITTORRENT_CONFIG = /mnt/rust/qbittorrent
+TV_PATH = /mnt/media/tv
+MOVIES_PATH = /mnt/media/movies
+MUSIC_PATH = /mnt/media/music
+DOWNLOADS_PATH = /mnt/media/downloads
+"""
+
+# ---------------------------------------------------------------------------
+# Photos (internal)
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "immich"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = ["apps/immich/docker-compose.yaml"]
+environment = """
+IMMICH_VERSION = [[IMMICH_VERSION]]
+IMMICH_VALKEY_VERSION = [[IMMICH_VALKEY_VERSION]]
+IMMICH_POSTGRES_VERSION = [[IMMICH_POSTGRES_VERSION]]
+UPLOAD_LOCATION = /mnt/media/immich/library
+MODELS_CACHE_LOCATION = /mnt/rust/immich/models
+DB_DATA_LOCATION = /mnt/fast/immich/postgres
+DB_USERNAME = postgres
+DB_PASSWORD =
+DB_DATABASE_NAME = immich
+IMMICH_HOST =
+"""
+
+# ---------------------------------------------------------------------------
+# AI (internal)
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "ai"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = [
+  "apps/ollama/docker-compose.yaml",
+  "apps/open-webui/docker-compose.yaml"
+]
+environment = """
+OLLAMA_VERSION = [[OLLAMA_VERSION]]
+OPEN_WEBUI_VERSION = [[OPEN_WEBUI_VERSION]]
+OPEN_WEBUI_HOST =
+"""
+
+# ---------------------------------------------------------------------------
+# Dev — public (forgejo only)
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "dev"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-public"]
+file_paths = ["apps/forgejo/docker-compose.yml"]
+environment = """
+FORGEJO_VERSION = [[FORGEJO_VERSION]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+FORGEJO_URL =
+FORGEJO_DATA = /mnt/rust/forgejo
+"""
+
+# ---------------------------------------------------------------------------
+# Storage (internal)
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "storage"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = ["apps/garage/docker-compose.yaml"]
+environment = """
+GARAGE_VERSION = [[GARAGE_VERSION]]
+GARAGE_WEBUI_VERSION = [[GARAGE_WEBUI_VERSION]]
+GARAGE_HOST =
+GARAGE_META_PATH = /mnt/rust/garage/meta
+GARAGE_DATA_PATH = /mnt/rust/garage/data
+"""
+
+# ---------------------------------------------------------------------------
+# Vaultwarden — public
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "vaultwarden"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-public"]
+file_paths = ["apps/vaultwarden/docker-compose.yaml"]
+environment = """
+VAULTWARDEN_VERSION = [[VAULTWARDEN_VERSION]]
+VAULTWARDEN_DATA = /mnt/rust/vaultwarden/data
+VAULTWARDEN_DOMAIN =
+"""
+
+# ---------------------------------------------------------------------------
+# Runner — no proxy
+# ---------------------------------------------------------------------------
+
+[[stack]]
+name = "runner"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["apps/forgejo-runner/docker-compose.yaml"]
+environment = """
+RUNNER_DATA = /mnt/rust/forgejo-runner/data
+"""

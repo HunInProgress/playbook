@@ -1,0 +1,37 @@
+networks:
+  internal:
+    name: internal
+    external: true
+  garage:
+    name: garage
+    driver: bridge
+
+services:
+  garage:
+    image: dxflrs/garage:${GARAGE_VERSION:-v2.3.0}
+    networks:
+      - garage
+    restart: unless-stopped
+    container_name: garage
+    volumes:
+      - ./garage.toml:/etc/garage.toml
+      - ${GARAGE_META_PATH:-/mnt/rust/garage/meta}:/var/lib/garage/meta
+      - ${GARAGE_DATA_PATH:-/mnt/rust/garage/data}:/var/lib/garage/data
+
+  webui:
+    image: khairul169/garage-webui:${GARAGE_WEBUI_VERSION:-1.1.0}
+    container_name: garage-webui
+    restart: unless-stopped
+    networks:
+      - internal
+      - garage
+    volumes:
+      - ./garage.toml:/etc/garage.toml:ro
+    environment:
+      API_BASE_URL: http://garage:3903
+      S3_ENDPOINT_URL: http://garage:3900
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.garage-webui.rule: Host(`${GARAGE_HOST}`)
+      traefik.http.routers.garage-webui.entrypoints: web
+      traefik.http.services.garage-webui.loadbalancer.server.port: 3909

@@ -1,0 +1,12 @@
+services:
+  runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forgejo-runner
+    user: 0:0
+    restart: unless-stopped
+    volumes:
+      - ${RUNNER_DATA:-/mnt/rust/forgejo-runner/data}:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: "forgejo-runner daemon --config runner-config.yml"

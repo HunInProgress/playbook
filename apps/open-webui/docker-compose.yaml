@@ -1,0 +1,27 @@
+networks:
+  internal:
+    name: internal
+    external: true
+  ollama:
+    name: ollama
+    external: true
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION:-v0.9.6}
+    container_name: open-webui
+    networks:
+      - internal
+      - ollama
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - /mnt/rust/open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.open-webui.rule: Host(`${OPEN_WEBUI_HOST}`)
+      traefik.http.routers.open-webui.entrypoints: web
+      traefik.http.services.open-webui.loadbalancer.server.port: 8080
