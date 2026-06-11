@@ -1,9 +1,6 @@
 name: komodo
 
 networks:
-  pangolin:
-    name: pangolin
-    external: true
   komodo:
     name: komodo
     driver: bridge
@@ -38,6 +35,7 @@ services:
     volumes:
       - ${KOMODO_KEYS_PATH:-/etc/komodo/keys}:/config/keys
       - ${KOMODO_BACKUPS_PATH:-/etc/komodo/backups}:/backups
+    ports:
+      - 9120:9120
     networks:
       - komodo
-      - pangolin
