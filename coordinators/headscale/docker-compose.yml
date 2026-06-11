@@ -10,6 +10,7 @@ services:
     restart: unless-stopped
     ports:
       - 8080:8080
+      - 3478:3478/UDP
 
   headplane:
     image: ghcr.io/tale/headplane:${HEADPLANE_VERSION:-0.6.3}
@@ -21,5 +22,5 @@ services:
       - /mnt/default/volumes/headplane/config.yaml:/etc/headplane/config.yaml
       - /mnt/default/volumes/headplane/lib/headplane:/var/lib/headplane
       - /mnt/default/volumes/headscale/config/config.yaml:/etc/headscale/config.yaml
-      - /mnt/default/volumes/headscale/config/dns_records.json:/etc/headscale/dns_records.json
+      - /mnt/default/volumes/headscale/config/dns_records.json:/etc/headscale/dns.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
