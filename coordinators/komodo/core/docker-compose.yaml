@@ -39,3 +39,19 @@ services:
       - 9120:9120
     networks:
       - komodo
+
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:${KOMODO_IMAGE_TAG:-2}
+    container_name: periphery
+    init: true
+    restart: unless-stopped
+    depends_on:
+      - komodo
+    env_file: .env
+    volumes:
+      - ${KOMODO_KEYS_PATH:-/etc/komodo/keys}:/config/keys
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc
+      - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+    networks:
+      - komodo
