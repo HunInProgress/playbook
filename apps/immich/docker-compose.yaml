@@ -13,6 +13,9 @@ networks:
   internal:
     name: internal
     external: true
+  immich:
+    name: immich
+    driver: bridge
 
 services:
   immich-server:
@@ -33,6 +36,7 @@ services:
     restart: always
     networks:
       - internal
+      - immich
     labels:
       traefik.enable: "true"
       traefik.http.routers.immich.rule: Host(`${IMMICH_HOST}`)
@@ -59,6 +63,8 @@ services:
     volumes:
       - ${MODELS_CACHE_LOCATION}:/cache
     restart: always
+    networks:
+      - immich
     deploy:
       resources:
         limits:
@@ -78,6 +84,8 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
+    networks:
+      - immich
     deploy:
       resources:
         limits:
@@ -97,6 +105,8 @@ services:
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
     shm_size: 128mb
     restart: always
+    networks:
+      - immich
     healthcheck:
       disable: false
     deploy:
