@@ -1,6 +1,6 @@
 services:
   headscale:
-    image: headscale/headscale:${HEADSCALE_VERSION:-v0.28.0}
+    image: headscale/headscale:${HEADSCALE_VERSION:-0.28.0}
     container_name: headscale
     volumes:
       - /mnt/default/volumes/headscale/config:/etc/headscale

@@ -69,13 +69,13 @@ description = "MongoDB for Komodo Core"
 
 [[variable]]
 name = "HEADSCALE_VERSION"
-value = "v0.29.0"
+value = "0.29.0"
 description = "Headscale control server"
 
 [[variable]]
-name = "HEADSCALE_ADMIN_VERSION"
-value = "0.26.0"
-description = "Headscale admin UI"
+name = "HEADPLANE_VERSION"
+value = "0.6.3"
+description = "Headplane admin UI"
 
 [[variable]]
 name = "PANGOLIN_VERSION"
