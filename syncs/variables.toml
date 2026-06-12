@@ -16,13 +16,13 @@ description = "Timezone for all services"
 
 [[variable]]
 name = "PUID"
-value = "1000"
-description = "Linux user ID for linuxserver.io containers"
+value = "100000"
+description = "Linux user ID for linuxserver.io containers (matches LXC subuid offset)"
 
 [[variable]]
 name = "PGID"
-value = "1000"
-description = "Linux group ID for linuxserver.io containers"
+value = "100000"
+description = "Linux group ID for linuxserver.io containers (matches LXC subgid offset)"
 
 [[variable]]
 name = "PANGOLIN_ENDPOINT"

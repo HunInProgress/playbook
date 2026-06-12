@@ -7,6 +7,7 @@ services:
   vaultwarden:
     image: vaultwarden/server:${VAULTWARDEN_VERSION:-1.21.0}
     container_name: vaultwarden
+    user: "${PUID:-100000}:${PGID:-100000}"
     restart: unless-stopped
     volumes:
       - ${VAULTWARDEN_DATA:-/mnt/rust/vaultwarden/data}:/data
@@ -15,3 +16,8 @@ services:
       - WEBSOCKET_ENABLED=true
     networks:
       - public
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M

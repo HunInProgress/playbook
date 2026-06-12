@@ -8,8 +8,8 @@ services:
     image: codeberg.org/forgejo/forgejo:${FORGEJO_VERSION:-15.0.2}
     container_name: forgejo
     environment:
-      - USER_UID=${PUID:-1000}
-      - USER_GID=${PGID:-1000}
+      - USER_UID=${PUID:-100000}
+      - USER_GID=${PGID:-100000}
       - FORGEJO__server__ROOT_URL=${FORGEJO_URL}
     restart: unless-stopped
     networks:
@@ -17,3 +17,8 @@ services:
     volumes:
       - ${FORGEJO_DATA:-/mnt/rust/forgejo}:/data
       - /etc/localtime:/etc/localtime:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G

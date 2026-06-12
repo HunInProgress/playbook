@@ -9,6 +9,7 @@ networks:
 services:
   garage:
     image: dxflrs/garage:${GARAGE_VERSION:-v2.3.0}
+    user: "${PUID:-100000}:${PGID:-100000}"
     networks:
       - garage
     restart: unless-stopped
@@ -17,10 +18,16 @@ services:
       - ./garage.toml:/etc/garage.toml
       - ${GARAGE_META_PATH:-/mnt/rust/garage/meta}:/var/lib/garage/meta
       - ${GARAGE_DATA_PATH:-/mnt/rust/garage/data}:/var/lib/garage/data
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
 
   webui:
     image: khairul169/garage-webui:${GARAGE_WEBUI_VERSION:-1.1.0}
     container_name: garage-webui
+    user: "${PUID:-100000}:${PGID:-100000}"
     restart: unless-stopped
     networks:
       - internal
@@ -35,3 +42,8 @@ services:
       traefik.http.routers.garage-webui.rule: Host(`${GARAGE_HOST}`)
       traefik.http.routers.garage-webui.entrypoints: web
       traefik.http.services.garage-webui.loadbalancer.server.port: 3909
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M

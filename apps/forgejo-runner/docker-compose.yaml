@@ -10,3 +10,8 @@ services:
       - ${RUNNER_DATA:-/mnt/rust/forgejo-runner/data}:/data
       - /var/run/docker.sock:/var/run/docker.sock
     command: "forgejo-runner daemon --config runner-config.yml"
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4G
