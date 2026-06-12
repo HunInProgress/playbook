@@ -35,7 +35,7 @@ QBITTORRENT_VERSION = [[QBITTORRENT_VERSION]]
 JELLYFIN_HOST = jelly.lab.hmmmm.dev
 JELLYFIN_CONFIG = /mnt/rust/jellyfin/config
 JELLYFIN_CACHE = /mnt/rust/jellyfin/cache
-MEDIA_PATH = /mnt/media
+MEDIA_PATH = /mnt/rust/media
 ARR_HOST = arr.lab.hmmmm.dev
 PROWLARR_CONFIG = /mnt/rust/prowlarr
 SONARR_CONFIG = /mnt/rust/sonarr
@@ -43,10 +43,10 @@ RADARR_CONFIG = /mnt/rust/radarr
 LIDARR_CONFIG = /mnt/rust/lidarr
 BAZARR_CONFIG = /mnt/rust/bazarr
 QBITTORRENT_CONFIG = /mnt/rust/qbittorrent
-TV_PATH = /mnt/media/tv
-MOVIES_PATH = /mnt/media/movies
-MUSIC_PATH = /mnt/media/music
-DOWNLOADS_PATH = /mnt/media/downloads
+TV_PATH = /mnt/rust/media/tv
+MOVIES_PATH = /mnt/rust/media/movies
+MUSIC_PATH = /mnt/rust/media/music
+DOWNLOADS_PATH = /mnt/rust/media/downloads
 """
 
 # ---------------------------------------------------------------------------
