@@ -16,6 +16,7 @@
 name = "proxy-internal"
 [stack.config]
 server = ""
+template = true
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["networks/proxy-internal/docker-compose.yaml"]
@@ -32,6 +33,7 @@ TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
 name = "proxy-public"
 [stack.config]
 server = ""
+template = true
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["networks/proxy-public/docker-compose.yaml"]
@@ -50,6 +52,7 @@ NEWT_SECRET =
 name = "proxy-private"
 [stack.config]
 server = ""
+template = true
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["networks/proxy-private/docker-compose.yaml"]
@@ -70,6 +73,7 @@ TAILSCALE_STATE = /var/tailscale/state
 name = "olm"
 [stack.config]
 server = ""
+template = true
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["apps/olm/docker-compose.yml"]

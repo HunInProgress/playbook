@@ -13,7 +13,7 @@
 [[stack]]
 name = "media"
 [stack.config]
-server = ""
+server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
 after = ["proxy-internal"]
@@ -32,11 +32,11 @@ RADARR_VERSION = [[RADARR_VERSION]]
 LIDARR_VERSION = [[LIDARR_VERSION]]
 BAZARR_VERSION = [[BAZARR_VERSION]]
 QBITTORRENT_VERSION = [[QBITTORRENT_VERSION]]
-JELLYFIN_HOST =
+JELLYFIN_HOST = jelly.lab.hmmmm.dev
 JELLYFIN_CONFIG = /mnt/rust/jellyfin/config
 JELLYFIN_CACHE = /mnt/rust/jellyfin/cache
 MEDIA_PATH = /mnt/media
-ARR_HOST =
+ARR_HOST = arr.lab.hmmmm.dev
 PROWLARR_CONFIG = /mnt/rust/prowlarr
 SONARR_CONFIG = /mnt/rust/sonarr
 RADARR_CONFIG = /mnt/rust/radarr
@@ -161,6 +161,7 @@ VAULTWARDEN_DOMAIN =
 name = "runner"
 [stack.config]
 server = ""
+template = true
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["apps/forgejo-runner/docker-compose.yaml"]

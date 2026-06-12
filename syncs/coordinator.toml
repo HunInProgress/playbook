@@ -33,7 +33,7 @@ TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
 [[stack]]
 name = "headscale"
 [stack.config]
-server = ""
+server = "Oracle"
 repo = "HunInProgress/playbook"
 branch = "master"
 after = ["proxy-internal"]
