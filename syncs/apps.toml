@@ -56,7 +56,7 @@ DOWNLOADS_PATH = /mnt/media/downloads
 [[stack]]
 name = "immich"
 [stack.config]
-server = ""
+server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
 after = ["proxy-internal"]
@@ -69,9 +69,9 @@ UPLOAD_LOCATION = /mnt/media/immich/library
 MODELS_CACHE_LOCATION = /mnt/rust/immich/models
 DB_DATA_LOCATION = /mnt/fast/immich/postgres
 DB_USERNAME = postgres
-DB_PASSWORD =
+DB_PASSWORD = 
 DB_DATABASE_NAME = immich
-IMMICH_HOST =
+IMMICH_HOST = immich.lab.hmmmm.dev
 """
 
 # ---------------------------------------------------------------------------

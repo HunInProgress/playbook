@@ -18,9 +18,6 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-v2.7.5}
-    # extends:
-    #   file: hwaccel.transcoding.yml
-    #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       - ${UPLOAD_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
@@ -46,15 +43,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2.0'
+          cpus: "2.0"
           memory: 2G
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              device_ids: ["1"]
               capabilities:
                 - gpu
-                - compute
                 - video
 
   immich-machine-learning:
@@ -66,14 +62,15 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4.0'
+          cpus: "4.0"
           memory: 4G
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              device_ids: ["0"]
               capabilities:
                 - gpu
+                - compute
 
   redis:
     container_name: immich_redis
@@ -84,7 +81,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 256M
 
   database:
@@ -105,7 +102,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2.0'
+          cpus: "2.0"
           memory: 1G
 
 volumes:
