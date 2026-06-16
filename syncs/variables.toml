@@ -78,6 +78,11 @@ value = "0.6.3"
 description = "Headplane admin UI"
 
 [[variable]]
+name = "HEADSCALE_CONSOLE_VERSION"
+value = "0.7.2"
+description = "Headscale Console"
+
+[[variable]]
 name = "PANGOLIN_VERSION"
 value = "ee-1.14.1"
 description = "Pangolin tunnel server"

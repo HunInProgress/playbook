@@ -24,3 +24,11 @@ services:
       - /mnt/default/volumes/headscale/config/config.yaml:/etc/headscale/config.yaml
       - /mnt/default/volumes/headscale/config/dns_records.json:/etc/headscale/dns.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  headscale-console:
+    image: ghcr.io/rickli-cloud/headscale-console:${HEADSCALE_CONSOLE_VERSION:-latest}
+    container_name: headscale-console
+    restart: unless-stopped
+    command: serve
+    ports:
+      - "3000:3001"
