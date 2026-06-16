@@ -31,4 +31,6 @@ services:
     restart: unless-stopped
     command: serve
     ports:
-      - "3000:3001"
+      - "3001:3000"
+    volumes:
+      - /mnt/default/volumes/headscale/config/config.yaml:/config.yaml:ro
