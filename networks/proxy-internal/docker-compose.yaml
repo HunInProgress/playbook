@@ -1,5 +1,5 @@
 # Internal proxy: traefik only (LAN / homelab).
-# Internal apps join `internal` and use Host() routing via traefik labels.
+# Internal apps join `internal` and use Host() routing via traefik labels..
 
 networks:
   internal:
