@@ -23,7 +23,6 @@ services:
       - "--providers.docker.network=internal"
       - "--log.level=INFO"
       - "--accesslog=true"
-      - "--api.dashboard=true"
       - "--api.insecure=true"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
