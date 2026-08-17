@@ -2,9 +2,6 @@ networks:
   internal:
     name: internal
     external: true
-  ollama:
-    name: ollama
-    external: true
 
 services:
   open-webui:

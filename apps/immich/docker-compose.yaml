@@ -33,7 +33,7 @@ services:
     depends_on:
       - redis
       - database
-    restart: always
+    restart: unless-stopped
     networks:
       - internal
       - immich
@@ -114,6 +114,3 @@ services:
         limits:
           cpus: "2.0"
           memory: 1G
-
-volumes:
-  model-cache:

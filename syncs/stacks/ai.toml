@@ -1,0 +1,22 @@
+## Komodo Resource Sync — ai
+## Register: repo HunInProgress/playbook  path: syncs/stacks/ai.toml
+
+[[stack]]
+name = "ai"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = [
+  "apps/ollama/docker-compose.yaml",
+  "apps/open-webui/docker-compose.yaml",
+]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+OLLAMA_VERSION = [[OLLAMA_VERSION]]
+OPEN_WEBUI_VERSION = [[OPEN_WEBUI_VERSION]]
+OPEN_WEBUI_HOST =
+"""

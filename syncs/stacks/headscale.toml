@@ -1,0 +1,15 @@
+## Komodo Resource Sync — headscale
+## Register: repo HunInProgress/playbook  path: syncs/stacks/headscale.toml
+
+[[stack]]
+name = "headscale"
+[stack.config]
+server = "Oracle"
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["coordinators/headscale/docker-compose.yml"]
+environment = """
+HEADSCALE_VERSION = [[HEADSCALE_VERSION]]
+HEADSCALE_ADMIN_VERSION = [[HEADSCALE_ADMIN_VERSION]]
+URL =
+"""

@@ -1,0 +1,15 @@
+## Komodo Resource Sync — pangolin
+## Register: repo HunInProgress/playbook  path: syncs/stacks/pangolin.toml
+
+[[stack]]
+name = "pangolin"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["coordinators/pangolin/docker-compose.yml"]
+environment = """
+PANGOLIN_VERSION = [[PANGOLIN_VERSION]]
+GERBIL_VERSION = [[GERBIL_VERSION]]
+TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
+"""

@@ -1,0 +1,17 @@
+## Komodo Resource Sync — olm
+## Register: repo HunInProgress/playbook  path: syncs/stacks/olm.toml
+
+[[stack]]
+name = "olm"
+[stack.config]
+server = ""
+template = true
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["apps/olm/docker-compose.yml"]
+environment = """
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
+OLM_VERSION = [[OLM_VERSION]]
+OLM_ID =
+OLM_SECRET =
+"""

@@ -1,0 +1,21 @@
+## Komodo Resource Sync — storage
+## Register: repo HunInProgress/playbook  path: syncs/stacks/storage.toml
+
+[[stack]]
+name = "storage"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = ["apps/garage/docker-compose.yaml"]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+GARAGE_VERSION = [[GARAGE_VERSION]]
+GARAGE_WEBUI_VERSION = [[GARAGE_WEBUI_VERSION]]
+GARAGE_HOST =
+GARAGE_META_PATH = /mnt/rust/garage/meta
+GARAGE_DATA_PATH = /mnt/rust/garage/data
+"""

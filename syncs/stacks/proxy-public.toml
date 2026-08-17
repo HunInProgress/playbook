@@ -1,0 +1,19 @@
+## Komodo Resource Sync — proxy-public
+## Register: repo HunInProgress/playbook  path: syncs/stacks/proxy-public.toml
+##
+## Shared public ingress (newt + `public` network).
+## App stacks (dev, vaultwarden, …) use after=["proxy-public"].
+
+[[stack]]
+name = "proxy-public"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["networks/proxy-public/docker-compose.yaml"]
+environment = """
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
+NEWT_VERSION = [[NEWT_VERSION]]
+NEWT_ID =
+NEWT_SECRET =
+"""

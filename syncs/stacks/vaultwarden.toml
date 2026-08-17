@@ -1,0 +1,18 @@
+## Komodo Resource Sync — vaultwarden
+## Register: repo HunInProgress/playbook  path: syncs/stacks/vaultwarden.toml
+
+[[stack]]
+name = "vaultwarden"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-public"]
+file_paths = ["apps/vaultwarden/docker-compose.yaml"]
+environment = """
+VAULTWARDEN_VERSION = [[VAULTWARDEN_VERSION]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+VAULTWARDEN_DATA = /mnt/rust/vaultwarden/data
+VAULTWARDEN_DOMAIN =
+"""

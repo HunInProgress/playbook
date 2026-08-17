@@ -1,0 +1,19 @@
+## Komodo Resource Sync — proxy-private
+## Register: repo HunInProgress/playbook  path: syncs/stacks/proxy-private.toml
+
+[[stack]]
+name = "proxy-private"
+[stack.config]
+server = ""
+template = true
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["networks/proxy-private/docker-compose.yaml"]
+environment = """
+HTTP_PORT = 80
+TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
+TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
+HOST_NAME =
+TS_AUTHKEY =
+TAILSCALE_STATE = /var/tailscale/state
+"""

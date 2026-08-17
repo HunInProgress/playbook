@@ -2,8 +2,9 @@
 ## Register in: Komodo UI > Resource Syncs > New Sync
 ##   repo: HunInProgress/playbook  path: syncs/variables.toml
 ##
-## Image version variables are interpolated into stack environments via [[VARIABLE_NAME]].
-## Compose files reference them as ${VARIABLE_NAME:-default}.
+## Stack definitions: syncs/stacks/<name>.toml (one Resource Sync per file).
+## Proxies (proxy-internal / proxy-public / proxy-private) own networks;
+## app stacks declare after=["proxy-…"] and join networks as external.
 
 # ---------------------------------------------------------------------------
 # General

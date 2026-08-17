@@ -1,0 +1,18 @@
+## Komodo Resource Sync — dev (forgejo)
+## Register: repo HunInProgress/playbook  path: syncs/stacks/dev.toml
+
+[[stack]]
+name = "dev"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-public"]
+file_paths = ["apps/forgejo/docker-compose.yml"]
+environment = """
+FORGEJO_VERSION = [[FORGEJO_VERSION]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+FORGEJO_URL = https://forge.hmmmm.dev
+FORGEJO_DATA = /mnt/rust/forgejo
+"""

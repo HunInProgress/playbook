@@ -14,8 +14,6 @@ services:
       - TZ=${TZ}
     volumes:
       - ${PROWLARR_CONFIG:-/mnt/rust/prowlarr}:/config
-    ports:
-      - "9696:9696"
     restart: unless-stopped
     networks:
       - internal
@@ -40,10 +38,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${SONARR_CONFIG:-/mnt/rust/sonarr}:/config
-      - ${TV_PATH:-/mnt/media/tv}:/tv
-      - ${DOWNLOADS_PATH:-/mnt/rust/downloads}:/downloads
-    ports:
-      - "8989:8989"
+      - ${TV_PATH:-/mnt/rust/media/tv}:/tv
+      - ${DOWNLOADS_PATH:-/mnt/rust/media/downloads}:/downloads
     depends_on:
       - prowlarr
     restart: unless-stopped
@@ -70,10 +66,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${RADARR_CONFIG:-/mnt/rust/radarr}:/config
-      - ${MOVIES_PATH:-/mnt/media/movies}:/movies
-      - ${DOWNLOADS_PATH:-/mnt/rust/downloads}:/downloads
-    ports:
-      - "7878:7878"
+      - ${MOVIES_PATH:-/mnt/rust/media/movies}:/movies
+      - ${DOWNLOADS_PATH:-/mnt/rust/media/downloads}:/downloads
     depends_on:
       - prowlarr
     restart: unless-stopped
@@ -100,10 +94,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${LIDARR_CONFIG:-/mnt/rust/lidarr}:/config
-      - ${MUSIC_PATH:-/mnt/media/music}:/music
-      - ${DOWNLOADS_PATH:-/mnt/rust/downloads}:/downloads
-    ports:
-      - "8686:8686"
+      - ${MUSIC_PATH:-/mnt/rust/media/music}:/music
+      - ${DOWNLOADS_PATH:-/mnt/rust/media/downloads}:/downloads
     depends_on:
       - prowlarr
     restart: unless-stopped
@@ -130,10 +122,8 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BAZARR_CONFIG:-/mnt/rust/bazarr}:/config
-      - ${TV_PATH:-/mnt/media/tv}:/tv
-      - ${MOVIES_PATH:-/mnt/media/movies}:/movies
-    ports:
-      - "6767:6767"
+      - ${TV_PATH:-/mnt/rust/media/tv}:/tv
+      - ${MOVIES_PATH:-/mnt/rust/media/movies}:/movies
     depends_on:
       - sonarr
       - radarr
@@ -162,9 +152,8 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - ${QBITTORRENT_CONFIG:-/mnt/rust/qbittorrent}:/config
-      - ${DOWNLOADS_PATH:-/mnt/rust/downloads}:/downloads
+      - ${DOWNLOADS_PATH:-/mnt/rust/media/downloads}:/downloads
     ports:
-      - "8080:8080"
       - "6881:6881"
       - "6881:6881/udp"
       - "6882:6882"

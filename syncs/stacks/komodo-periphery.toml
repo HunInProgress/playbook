@@ -1,0 +1,21 @@
+## Komodo Resource Sync — komodo periphery
+## Register: repo HunInProgress/playbook  path: syncs/stacks/komodo-periphery.toml
+
+[[stack]]
+name = "komodo-periphery"
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "coordinators/komodo/periphery"
+file_paths = ["docker-compose.yaml"]
+environment = """
+KOMODO_IMAGE_TAG = [[KOMODO_IMAGE_TAG]]
+TZ = [[TZ]]
+PERIPHERY_CORE_ADDRESS =        # ws://<core-hostname-or-ip>:9120
+PERIPHERY_CONNECT_AS =          # name shown in Komodo UI
+PERIPHERY_ONBOARDING_KEY =      # generate in Komodo UI > Settings > Onboarding; remove after first connect
+PERIPHERY_CORE_PUBLIC_KEYS = file:/config/keys/core.pub
+PERIPHERY_ROOT_DIRECTORY = /etc/komodo
+PERIPHERY_INCLUDE_DISK_MOUNTS = /etc/hostname
+"""

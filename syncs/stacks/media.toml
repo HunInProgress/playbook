@@ -1,0 +1,43 @@
+## Komodo Resource Sync — media
+## Register: repo HunInProgress/playbook  path: syncs/stacks/media.toml
+##
+## Joins shared `internal` from proxy-internal. Independent of immich.
+
+[[stack]]
+name = "media"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = [
+  "apps/jellyfin/docker-compose.yml",
+  "apps/arr/docker-compose.yaml",
+]
+environment = """
+TZ = [[TZ]]
+PUID = [[PUID]]
+PGID = [[PGID]]
+JELLYFIN_VERSION = [[JELLYFIN_VERSION]]
+PROWLARR_VERSION = [[PROWLARR_VERSION]]
+SONARR_VERSION = [[SONARR_VERSION]]
+RADARR_VERSION = [[RADARR_VERSION]]
+LIDARR_VERSION = [[LIDARR_VERSION]]
+BAZARR_VERSION = [[BAZARR_VERSION]]
+QBITTORRENT_VERSION = [[QBITTORRENT_VERSION]]
+JELLYFIN_HOST = jelly.lab.hmmmm.dev
+JELLYFIN_CONFIG = /mnt/rust/jellyfin/config
+JELLYFIN_CACHE = /mnt/rust/jellyfin/cache
+MEDIA_PATH = /mnt/rust/media
+ARR_HOST = arr.lab.hmmmm.dev
+PROWLARR_CONFIG = /mnt/rust/prowlarr
+SONARR_CONFIG = /mnt/rust/sonarr
+RADARR_CONFIG = /mnt/rust/radarr
+LIDARR_CONFIG = /mnt/rust/lidarr
+BAZARR_CONFIG = /mnt/rust/bazarr
+QBITTORRENT_CONFIG = /mnt/rust/qbittorrent
+TV_PATH = /mnt/rust/media/tv
+MOVIES_PATH = /mnt/rust/media/movies
+MUSIC_PATH = /mnt/rust/media/music
+DOWNLOADS_PATH = /mnt/rust/media/downloads
+"""

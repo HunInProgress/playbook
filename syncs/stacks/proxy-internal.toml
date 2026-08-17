@@ -1,0 +1,17 @@
+## Komodo Resource Sync — proxy-internal
+## Register: repo HunInProgress/playbook  path: syncs/stacks/proxy-internal.toml
+##
+## Shared LAN ingress. Owns Traefik + `internal` network.
+## App stacks (media, immich, …) use after=["proxy-internal"] and join as external.
+
+[[stack]]
+name = "proxy-internal"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["networks/proxy-internal/docker-compose.yaml"]
+environment = """
+HTTP_PORT = 80
+TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
+"""

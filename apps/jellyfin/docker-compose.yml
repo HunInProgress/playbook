@@ -15,7 +15,7 @@ services:
     volumes:
       - ${JELLYFIN_CONFIG:-/mnt/rust/jellyfin/config}:/config
       - ${JELLYFIN_CACHE:-/mnt/rust/jellyfin/cache}:/cache
-      - ${MEDIA_PATH:-/mnt/media}:/media:ro
+      - ${MEDIA_PATH:-/mnt/rust/media}:/media:ro
     restart: unless-stopped
     networks:
       - internal

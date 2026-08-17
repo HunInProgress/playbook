@@ -1,0 +1,15 @@
+## Komodo Resource Sync — forgejo runner
+## Register: repo HunInProgress/playbook  path: syncs/stacks/runner.toml
+
+[[stack]]
+name = "runner"
+[stack.config]
+server = ""
+template = true
+repo = "HunInProgress/playbook"
+branch = "master"
+run_directory = "apps/forgejo-runner"
+file_paths = ["docker-compose.yaml"]
+environment = """
+RUNNER_DATA = /mnt/rust/forgejo-runner/data
+"""

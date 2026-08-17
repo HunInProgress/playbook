@@ -1,0 +1,25 @@
+## Komodo Resource Sync — immich
+## Register: repo HunInProgress/playbook  path: syncs/stacks/immich.toml
+##
+## Joins shared `internal` from proxy-internal. Independent of media.
+
+[[stack]]
+name = "immich"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+after = ["proxy-internal"]
+file_paths = ["apps/immich/docker-compose.yaml"]
+environment = """
+IMMICH_VERSION = [[IMMICH_VERSION]]
+IMMICH_VALKEY_VERSION = [[IMMICH_VALKEY_VERSION]]
+IMMICH_POSTGRES_VERSION = [[IMMICH_POSTGRES_VERSION]]
+UPLOAD_LOCATION = /mnt/rust/immich/library
+MODELS_CACHE_LOCATION = /mnt/rust/immich/models
+DB_DATA_LOCATION = /mnt/fast/immich/postgres
+DB_USERNAME = postgres
+DB_PASSWORD = 
+DB_DATABASE_NAME = immich
+IMMICH_HOST = immich.lab.hmmmm.dev
+"""

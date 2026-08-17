@@ -17,7 +17,7 @@ services:
       - "${HTTP_PORT:-80}:80"
       - "8088:8080"
     command:
-      - "--entrypoints.web.address=:${HTTP_PORT:-80}"
+      - "--entrypoints.web.address=:80"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=internal"
