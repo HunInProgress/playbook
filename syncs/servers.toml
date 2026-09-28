@@ -1,9 +1,13 @@
 ## Komodo Resource Sync — Servers (Periphery targets)
-## Register: repo HunInProgress/playbook  path: syncs/servers.toml
+## Must be in Resource Sync resource_path with stacks (list this file explicitly — not syncs/ root).
+## Execute sync after Periphery is up so Lab/Oracle exist before stacks attach.
 ##
-## Names must match stack.config.server in syncs/stacks/*.toml (Lab, Oracle, …).
-## Set LAB_PERIPHERY_ADDRESS / ORACLE_PERIPHERY_ADDRESS in variables.toml or Komodo UI.
-## Passkeys and onboarding: configure in UI after first Periphery connect — do not commit secrets.
+## Names must exactly match stack.config.server (Lab, Oracle) and PERIPHERY_CONNECT_AS
+## on each host (scripts/deploy-periphery.sh — do not accept the hostname default if wrong).
+##
+## Set LAB_PERIPHERY_ADDRESS / ORACLE_PERIPHERY_ADDRESS in variables.toml or Komodo UI
+## to how Core reaches each Periphery (https://host:8120 or empty if outbound-only).
+## Passkeys/onboarding: UI after first connect — do not commit secrets.
 
 [[server]]
 name = "Lab"

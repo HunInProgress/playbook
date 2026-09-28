@@ -1,9 +1,8 @@
 ## Komodo Resource Sync — Global Variables
-## Register in: Komodo UI > Resource Syncs > New Sync
-##   repo: HunInProgress/playbook  path: syncs/variables.toml
+## Resource Sync: syncs/resources.toml (UI name huninprogress) — see komodo-ui-sync.example.toml
 ##
 ## Stack definitions: syncs/stacks/<name>.toml (Komodo-managed only)
-## Server definitions: syncs/servers.toml
+## Server definitions: syncs/servers.toml (include in Resource Sync path with stacks)
 ## Per-host network stacks: syncs/stacks/network.toml (network-lab, network-oracle).
 ##
 ## Tier-0 coordinators (manual — not Resource Sync; Periphery cannot deploy these):

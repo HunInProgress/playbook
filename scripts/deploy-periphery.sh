@@ -54,7 +54,8 @@ header "Core connection"
 echo -e "  ${YELLOW}Tip:${RESET} find the Core address in Komodo UI → Settings → Authentication"
 echo
 ask PERIPHERY_CORE_ADDRESS "Komodo Core WebSocket address" "ws://<CORE_IP>:9120"
-ask PERIPHERY_CONNECT_AS   "Name for this server in the UI" "$HOSTNAME"
+echo -e "  ${YELLOW}Must match${RESET} syncs/servers.toml and stacks (e.g. Lab, Oracle) — not the OS hostname unless you changed git to match."
+ask PERIPHERY_CONNECT_AS   "Name for this server in the UI" "Lab"
 
 header "Authentication"
 echo -e "  ${YELLOW}Tip:${RESET} generate an onboarding key in Komodo UI → Settings → Onboarding"

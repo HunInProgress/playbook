@@ -1,0 +1,13 @@
+[[resource_sync]]
+name = "huninprogress"
+[resource_sync.config]
+repo = "HunInProgress/playbook"
+branch = "master"
+resource_path = [
+  "syncs/resources.toml",
+  "syncs/variables.toml",
+  "syncs/servers.toml",
+  "syncs/stacks",
+]
+delete = true
+include_variables = true
