@@ -4,10 +4,10 @@ name = "huninprogress"
 repo = "huninprogress/playbook"
 branch = "master"
 resource_path = [
-  "syncs/resources.toml",
+  "syncs/stacks",
   "syncs/variables.toml",
   "syncs/servers.toml",
-  "syncs/stacks",
+  "syncs/resources.toml"
 ]
 delete = true
 include_variables = true
