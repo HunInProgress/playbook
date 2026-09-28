@@ -7,12 +7,13 @@ name = "dev"
 server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["proxy-public"]
+after = ["network"]
 file_paths = ["apps/forgejo/docker-compose.yml"]
 environment = """
 FORGEJO_VERSION = [[FORGEJO_VERSION]]
 PUID = [[PUID]]
 PGID = [[PGID]]
-FORGEJO_URL = https://forge.hmmmm.dev
+FORGEJO_HOST = [[FORGEJO_HOST]]
+FORGEJO_URL = [[FORGEJO_URL]]
 FORGEJO_DATA = /mnt/rust/forgejo
 """

@@ -1,0 +1,27 @@
+## Komodo Resource Sync — network (template)
+## Register: repo HunInProgress/playbook  path: syncs/stacks/network.toml
+##
+## One stack per server: Traefik + internal/public/private + newt + tailscale.
+## Duplicate from template in Komodo for each Server (Lab, Oracle, …) with per-host env
+## (NEWT_*, TS_AUTHKEY, HOST_NAME). App stacks use after=["network"].
+
+[[stack]]
+name = "network"
+template = true
+[stack.config]
+server = ""
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["networks/network/docker-compose.yaml"]
+environment = """
+HTTP_PORT = 80
+TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
+NEWT_VERSION = [[NEWT_VERSION]]
+NEWT_ID =
+NEWT_SECRET =
+TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
+HOST_NAME =
+TS_AUTHKEY =
+TAILSCALE_STATE = /var/tailscale/state
+"""

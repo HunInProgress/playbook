@@ -1,3 +1,5 @@
+# Manual bootstrap — not a Komodo stack. Deploy before Resource Sync stacks.
+
 services:
   headscale:
     image: headscale/headscale:${HEADSCALE_VERSION:-v0.28.0}

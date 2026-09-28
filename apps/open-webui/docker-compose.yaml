@@ -20,6 +20,7 @@ services:
     restart: unless-stopped
     labels:
       traefik.enable: "true"
+      traefik.docker.network: internal
       traefik.http.routers.open-webui.rule: Host(`${OPEN_WEBUI_HOST}`)
       traefik.http.routers.open-webui.entrypoints: web
       traefik.http.services.open-webui.loadbalancer.server.port: 8080

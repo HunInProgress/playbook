@@ -21,6 +21,7 @@ services:
       - internal
     labels:
       traefik.enable: "true"
+      traefik.docker.network: internal
       traefik.http.routers.jellyfin.rule: Host(`${JELLYFIN_HOST}`)
       traefik.http.routers.jellyfin.entrypoints: web
       traefik.http.services.jellyfin.loadbalancer.server.port: 8096

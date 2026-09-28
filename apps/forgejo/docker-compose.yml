@@ -17,6 +17,12 @@ services:
     volumes:
       - ${FORGEJO_DATA:-/mnt/rust/forgejo}:/data
       - /etc/localtime:/etc/localtime:ro
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: public
+      traefik.http.routers.forgejo.rule: Host(`${FORGEJO_HOST}`)
+      traefik.http.routers.forgejo.entrypoints: web
+      traefik.http.services.forgejo.loadbalancer.server.port: 3000
     deploy:
       resources:
         limits:

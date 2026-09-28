@@ -41,6 +41,7 @@ services:
       S3_ENDPOINT_URL: http://garage:3900
     labels:
       traefik.enable: "true"
+      traefik.docker.network: internal
       traefik.http.routers.garage-webui.rule: Host(`${GARAGE_HOST}`)
       traefik.http.routers.garage-webui.entrypoints: web
       traefik.http.services.garage-webui.loadbalancer.server.port: 3909

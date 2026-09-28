@@ -1,7 +1,7 @@
 ## Komodo Resource Sync — immich
 ## Register: repo HunInProgress/playbook  path: syncs/stacks/immich.toml
 ##
-## Joins shared `internal` from proxy-internal. Independent of media.
+## Joins `internal` from the network stack on this server.
 
 [[stack]]
 name = "immich"
@@ -9,7 +9,7 @@ name = "immich"
 server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["proxy-internal"]
+after = ["network"]
 file_paths = ["apps/immich/docker-compose.yaml"]
 environment = """
 IMMICH_VERSION = [[IMMICH_VERSION]]

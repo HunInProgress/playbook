@@ -1,3 +1,6 @@
+# Manual bootstrap on remote hosts — use scripts/deploy-periphery.sh (not Resource Sync).
+# Core node bundles periphery in coordinators/komodo/core/docker-compose.yaml.
+
 name: komodo-periphery
 
 services:

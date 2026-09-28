@@ -1,7 +1,7 @@
 ## Komodo Resource Sync — media
 ## Register: repo HunInProgress/playbook  path: syncs/stacks/media.toml
 ##
-## Joins shared `internal` from proxy-internal. Independent of immich.
+## Joins `internal` from the network stack on this server.
 
 [[stack]]
 name = "media"
@@ -9,7 +9,7 @@ name = "media"
 server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["proxy-internal"]
+after = ["network"]
 file_paths = [
   "apps/jellyfin/docker-compose.yml",
   "apps/arr/docker-compose.yaml",

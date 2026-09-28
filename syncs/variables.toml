@@ -2,9 +2,15 @@
 ## Register in: Komodo UI > Resource Syncs > New Sync
 ##   repo: HunInProgress/playbook  path: syncs/variables.toml
 ##
-## Stack definitions: syncs/stacks/<name>.toml (one Resource Sync per file).
-## Proxies (proxy-internal / proxy-public / proxy-private) own networks;
-## app stacks declare after=["proxy-…"] and join networks as external.
+## Stack definitions: syncs/stacks/<name>.toml (Komodo-managed only)
+## Server definitions: syncs/servers.toml
+## Per-server network template: syncs/stacks/network.toml; apps use after=["network"].
+##
+## Not in Resource Sync (bootstrap before Komodo can deploy stacks):
+##   Komodo Core (+ local Periphery): scripts/deploy-komodo.sh
+##   Periphery on other hosts: scripts/deploy-periphery.sh
+##   Pangolin: coordinators/pangolin/docker-compose.yml
+##   Headscale: coordinators/headscale/docker-compose.yml
 
 # ---------------------------------------------------------------------------
 # General
@@ -27,8 +33,18 @@ description = "Process GID for app containers"
 
 [[variable]]
 name = "PANGOLIN_ENDPOINT"
-value = ""
+value = "https://pangolin.hmmmm.dev"
 description = "Pangolin server endpoint shared by newt and olm (e.g. https://pangolin.example.com)"
+
+[[variable]]
+name = "LAB_PERIPHERY_ADDRESS"
+value = ""
+description = "Komodo Server Lab — Core reaches Periphery (e.g. https://lab.example:8120). Empty if Periphery uses outbound-only."
+
+[[variable]]
+name = "ORACLE_PERIPHERY_ADDRESS"
+value = ""
+description = "Komodo Server Oracle — Core reaches Periphery (e.g. https://oracle.example:8120)"
 
 # ---------------------------------------------------------------------------
 # Network / proxy images
@@ -92,6 +108,30 @@ description = "Pangolin tunnel server"
 name = "GERBIL_VERSION"
 value = "1.3.0"
 description = "Gerbil WireGuard component for Pangolin"
+
+# ---------------------------------------------------------------------------
+# Public app hostnames (Traefik + app config)
+# ---------------------------------------------------------------------------
+
+[[variable]]
+name = "FORGEJO_HOST"
+value = "forge.hmmmm.dev"
+description = "Forgejo Traefik Host() rule"
+
+[[variable]]
+name = "FORGEJO_URL"
+value = "https://forge.hmmmm.dev"
+description = "Forgejo FORGEJO__server__ROOT_URL"
+
+[[variable]]
+name = "VAULTWARDEN_HOST"
+value = "vault.hmmmm.dev"
+description = "Vaultwarden Traefik Host() rule"
+
+[[variable]]
+name = "VAULTWARDEN_DOMAIN"
+value = "https://vault.hmmmm.dev"
+description = "Vaultwarden DOMAIN (public URL)"
 
 # ---------------------------------------------------------------------------
 # Application images

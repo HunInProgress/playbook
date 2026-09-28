@@ -7,7 +7,7 @@ name = "ai"
 server = ""
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["proxy-internal"]
+after = ["network"]
 file_paths = [
   "apps/ollama/docker-compose.yaml",
   "apps/open-webui/docker-compose.yaml",

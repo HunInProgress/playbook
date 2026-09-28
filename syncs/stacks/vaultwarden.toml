@@ -7,12 +7,13 @@ name = "vaultwarden"
 server = ""
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["proxy-public"]
+after = ["network"]
 file_paths = ["apps/vaultwarden/docker-compose.yaml"]
 environment = """
 VAULTWARDEN_VERSION = [[VAULTWARDEN_VERSION]]
 PUID = [[PUID]]
 PGID = [[PGID]]
+VAULTWARDEN_HOST = [[VAULTWARDEN_HOST]]
+VAULTWARDEN_DOMAIN = [[VAULTWARDEN_DOMAIN]]
 VAULTWARDEN_DATA = /mnt/rust/vaultwarden/data
-VAULTWARDEN_DOMAIN =
 """
