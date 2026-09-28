@@ -24,13 +24,12 @@ TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
 HOST_NAME = lab
 TS_AUTHKEY =
 TAILSCALE_STATE = /var/tailscale/state
-TRAEFIK_PRIVATE_IP = 172.30.0.2
 """
 
 [[stack]]
 name = "network-oracle"
 [stack.config]
-server = ""
+server = "Oracle"
 repo = "HunInProgress/playbook"
 branch = "master"
 file_paths = ["networks/network/docker-compose.yaml"]
@@ -45,5 +44,4 @@ TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
 HOST_NAME = oracle
 TS_AUTHKEY =
 TAILSCALE_STATE = /var/tailscale/state
-TRAEFIK_PRIVATE_IP = 172.30.0.2
 """
