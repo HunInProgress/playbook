@@ -54,7 +54,7 @@ services:
     hostname: ${HOST_NAME}
     restart: unless-stopped
     depends_on:
-      - traefik-internal
+      - traefik
     networks:
       - private
     environment:
