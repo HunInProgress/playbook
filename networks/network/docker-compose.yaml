@@ -18,7 +18,7 @@ networks:
 services:
   traefik:
     image: traefik:${TRAEFIK_VERSION:-v3.7.4}
-    container_name: traefik
+    container_name: traefik-internal
     restart: unless-stopped
     networks:
       - internal
@@ -54,14 +54,14 @@ services:
     hostname: ${HOST_NAME}
     restart: unless-stopped
     depends_on:
-      - traefik
+      - traefik-internal
     networks:
       - private
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
-      - TS_DEST_IP=traefik
+      - TS_DEST_IP=traefik-internal
     volumes:
       - ${TAILSCALE_STATE:-/var/tailscale/state}:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
