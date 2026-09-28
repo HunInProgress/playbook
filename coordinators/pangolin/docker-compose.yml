@@ -1,5 +1,3 @@
-# Manual bootstrap — not a Komodo stack. Deploy before Resource Sync stacks.
-
 name: pangolin
 
 networks:
