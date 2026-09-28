@@ -50,10 +50,10 @@ if [[ -f "$ENV_FILE" ]]; then
 fi
 
 # ── Collect variables ─────────────────────────────────────────────────────────
-header "Core connection"
-echo -e "  ${YELLOW}Tip:${RESET} find the Core address in Komodo UI → Settings → Authentication"
+header "Core connection (outbound — Lab/Oracle need not be reachable from the internet)"
+echo -e "  ${YELLOW}Tip:${RESET} Core public URL or ws://host:9120 — Periphery dials Core; leave Server address empty in Komodo."
 echo
-ask PERIPHERY_CORE_ADDRESS "Komodo Core WebSocket address" "ws://<CORE_IP>:9120"
+ask PERIPHERY_CORE_ADDRESS "Komodo Core WebSocket address" "wss://<CORE_PUBLIC_HOST>"
 echo -e "  ${YELLOW}Must match${RESET} syncs/servers.toml and stacks (e.g. Lab, Oracle) — not the OS hostname unless you changed git to match."
 ask PERIPHERY_CONNECT_AS   "Name for this server in the UI" "Lab"
 

@@ -1,20 +1,20 @@
 ## Komodo Resource Sync — Servers (Periphery targets)
-## Must be in Resource Sync resource_path with stacks (list this file explicitly — not syncs/ root).
-## Execute sync after Periphery is up so Lab/Oracle exist before stacks attach.
+## Outbound Periphery: agents dial Core (PERIPHERY_CORE_ADDRESS). Leave address empty —
+## Core does not need a public URL to Lab/Oracle; commands use the open WebSocket.
 ##
-## Names must exactly match stack.config.server (Lab, Oracle) and PERIPHERY_CONNECT_AS
-## on each host (scripts/deploy-periphery.sh — do not accept the hostname default if wrong).
+## Bootstrap order:
+##   1. Execute sync (creates Lab / Oracle Server rows with empty address), OR create in UI
+##   2. deploy-periphery.sh on each host with PERIPHERY_CONNECT_AS = Lab | Oracle
+##   3. Onboarding key links the agent; stacks can attach to server name
 ##
-## Set LAB_PERIPHERY_ADDRESS / ORACLE_PERIPHERY_ADDRESS in variables.toml or Komodo UI
-## to how Core reaches each Periphery (https://host:8120 or empty if outbound-only).
-## Passkeys/onboarding: UI after first connect — do not commit secrets.
+## Names must match stack.config.server and PERIPHERY_CONNECT_AS exactly.
 
 [[server]]
 name = "Lab"
-description = "Homelab Docker host (network template + apps)"
+description = "Homelab Docker host (apps)"
 tags = ["homelab"]
 [server.config]
-address = "[[LAB_PERIPHERY_ADDRESS]]"
+address = ""
 region = "lab"
 enabled = true
 stats_monitoring = true
@@ -24,7 +24,7 @@ name = "Oracle"
 description = "Cloud / Oracle host"
 tags = ["cloud"]
 [server.config]
-address = "[[ORACLE_PERIPHERY_ADDRESS]]"
+address = ""
 region = "oracle"
 enabled = true
 stats_monitoring = true

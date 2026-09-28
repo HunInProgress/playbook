@@ -37,16 +37,6 @@ name = "PANGOLIN_ENDPOINT"
 value = "https://pangolin.hmmmm.dev"
 description = "Pangolin server endpoint shared by newt and olm (e.g. https://pangolin.example.com)"
 
-[[variable]]
-name = "LAB_PERIPHERY_ADDRESS"
-value = ""
-description = "Komodo Server Lab — Core reaches Periphery (e.g. https://lab.example:8120). Empty if Periphery uses outbound-only."
-
-[[variable]]
-name = "ORACLE_PERIPHERY_ADDRESS"
-value = ""
-description = "Komodo Server Oracle — Core reaches Periphery (e.g. https://oracle.example:8120)"
-
 # ---------------------------------------------------------------------------
 # Network / proxy images
 # ---------------------------------------------------------------------------
