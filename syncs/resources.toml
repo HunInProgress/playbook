@@ -1,7 +1,7 @@
 [[resource_sync]]
 name = "huninprogress"
 [resource_sync.config]
-repo = "HunInProgress/playbook"
+repo = "huninprogress/playbook"
 branch = "master"
 resource_path = [
   "syncs/resources.toml",
