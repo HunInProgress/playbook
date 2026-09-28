@@ -37,6 +37,11 @@ name = "PANGOLIN_ENDPOINT"
 value = "https://pangolin.hmmmm.dev"
 description = "Pangolin server endpoint shared by newt and olm (e.g. https://pangolin.example.com)"
 
+[[variable]]
+name = "HEADSCALE_LOGIN_SERVER"
+value = "https://headscale.hmmmm.dev"
+description = "Headscale URL for Tailscale clients (TS_LOGIN_SERVER), e.g. https://headscale.example.com"
+
 # ---------------------------------------------------------------------------
 # Network / proxy images
 # ---------------------------------------------------------------------------
