@@ -4,14 +4,14 @@
 ##
 ## Stack definitions: syncs/stacks/<name>.toml (Komodo-managed only)
 ## Server definitions: syncs/servers.toml
-## Per-server network template: syncs/stacks/network.toml; apps use after=["network"].
+## Per-host network stacks: syncs/stacks/network.toml (network-lab, network-oracle).
 ##
 ## Tier-0 coordinators (manual — not Resource Sync; Periphery cannot deploy these):
 ##   1. Headscale on Oracle — scripts/deploy-headscale.sh (before Periphery / Tailscale clients)
 ##   2. Komodo Core — scripts/deploy-komodo.sh
 ##   3. Periphery on each host — scripts/deploy-periphery.sh
 ##   4. Pangolin (optional) — public tunnel for newt; not required for Periphery bootstrap
-## Then: Resource Sync stacks (network template, apps). Issue TS_AUTHKEY after Headscale is up.
+## Active stacks (Lab): network-lab, dev, media, immich. Others in syncs/stacks/ are server="" until enabled.
 ## Coordinator image tags: coordinators/*/.env.example (not Komodo variables).
 
 # ---------------------------------------------------------------------------

@@ -9,7 +9,7 @@ name = "media"
 server = "Lab"
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["network"]
+after = ["network-lab"]
 file_paths = [
   "apps/jellyfin/docker-compose.yml",
   "apps/arr/docker-compose.yaml",

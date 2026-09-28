@@ -1,5 +1,5 @@
 # Per-host network stack: three isolated bridges, one Traefik, newt (public), tailscale (private).
-# Instantiate from Komodo template on every server; app stacks use after=["network"].
+# Deploy via Komodo stacks network-lab / network-oracle; apps use after=["network-<host>"].
 #
 # Traefik is on internal, public, and private. Do not set providers.docker.network globally;
 # each app label must set traefik.docker.network to the zone it uses.

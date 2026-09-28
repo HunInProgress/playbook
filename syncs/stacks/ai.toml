@@ -1,4 +1,4 @@
-## Komodo Resource Sync — ai
+## Komodo Resource Sync — ai (inactive — set server + after when enabling)
 ## Register: repo HunInProgress/playbook  path: syncs/stacks/ai.toml
 
 [[stack]]
@@ -7,7 +7,6 @@ name = "ai"
 server = ""
 repo = "HunInProgress/playbook"
 branch = "master"
-after = ["network"]
 file_paths = [
   "apps/ollama/docker-compose.yaml",
   "apps/open-webui/docker-compose.yaml",

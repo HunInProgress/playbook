@@ -1,13 +1,34 @@
-## Komodo Resource Sync — network (template)
+## Komodo Resource Sync — network (per host)
 ## Register: repo HunInProgress/playbook  path: syncs/stacks/network.toml
 ##
-## One stack per server: Traefik + internal/public/private + newt + tailscale.
-## Duplicate from template in Komodo for each Server (Lab, Oracle, …) with per-host env
-## (NEWT_*, TS_AUTHKEY, HOST_NAME). App stacks use after=["network"].
+## Traefik + internal/public/private + newt + tailscale on each Docker host.
+## Requires Headscale (manual on Oracle) and per-host TS_AUTHKEY before Tailscale joins.
+## Fill NEWT_*, TS_AUTHKEY, HOST_NAME in Komodo (or here); do not commit secrets.
+## Active on Lab: network-lab + dev, media, immich. network-oracle unassigned until needed.
 
 [[stack]]
-name = "network"
-template = true
+name = "network-lab"
+[stack.config]
+server = "Lab"
+repo = "HunInProgress/playbook"
+branch = "master"
+file_paths = ["networks/network/docker-compose.yaml"]
+environment = """
+HTTP_PORT = 80
+TRAEFIK_VERSION = [[TRAEFIK_VERSION]]
+PANGOLIN_ENDPOINT = [[PANGOLIN_ENDPOINT]]
+NEWT_VERSION = [[NEWT_VERSION]]
+NEWT_ID =
+NEWT_SECRET =
+TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
+HOST_NAME = lab
+TS_AUTHKEY =
+TAILSCALE_STATE = /var/tailscale/state
+TRAEFIK_PRIVATE_IP = 172.30.0.2
+"""
+
+[[stack]]
+name = "network-oracle"
 [stack.config]
 server = ""
 repo = "HunInProgress/playbook"
@@ -21,7 +42,8 @@ NEWT_VERSION = [[NEWT_VERSION]]
 NEWT_ID =
 NEWT_SECRET =
 TAILSCALE_VERSION = [[TAILSCALE_VERSION]]
-HOST_NAME =
+HOST_NAME = oracle
 TS_AUTHKEY =
 TAILSCALE_STATE = /var/tailscale/state
+TRAEFIK_PRIVATE_IP = 172.30.0.2
 """
